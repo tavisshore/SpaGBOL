@@ -2,9 +2,9 @@
  
 # 🌍🚗 SpaGBOL: Spatial-Graph-Based Orientated Localisation 📡🗺️ 
 <p align="middle">
- <a href="https://tavisshore.co.uk/" style="font-size:20px;">Tavis Shore</a>
- <a href="https://personalpages.surrey.ac.uk/s.hadfield/biography.html" style="font-size:20px;">Simon Hadfield</a>
- <a href="https://cvssp.org/Personal/OscarMendez/index.html" style="font-size:20px;">Oscar Mendez</a>
+ <h3 href="https://tavisshore.co.uk/">Tavis Shore</h3>
+ <h3 href="https://personalpages.surrey.ac.uk/s.hadfield/biography.html">Simon Hadfield</h3>
+ <h3 href="https://cvssp.org/Personal/OscarMendez/index.html">Oscar Mendez</h3>
 </p>
 <p align="middle">
  <a href="https://www.surrey.ac.uk/centre-vision-speech-signal-processing">Centre for Vision, Speech, and Signal Processing (CVSSP)</a>
