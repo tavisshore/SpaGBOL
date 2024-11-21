@@ -2,7 +2,7 @@
  
 # 🌍🚗 SpaGBOL: Spatial-Graph-Based Orientated Localisation 📡🗺️ 
 
-[![Paper](http://img.shields.io/badge/paper-arxiv.1001.2234-B31B1B.svg)](https://arxiv.org/abs/2409.15514)
+[![Paper](http://img.shields.io/badge/ArXiv-2409.15514-B31B1B.svg)](https://arxiv.org/abs/2409.15514)
 [![Conference](http://img.shields.io/badge/WACV-2025-4b44ce.svg)](https://wacv2025.thecvf.com/)
 [![Project Page](http://img.shields.io/badge/Project-Page-4b44ce.svg)](https://tavisshore.co.uk/spagbol/)
 
@@ -16,7 +16,9 @@ Cross-View Geo-Localisation within urban regions is challenging in part due to t
 
 We release **SpaGBOL**, the first graph-based CVGL dataset, consisting of 10 city centre graph networks across the globe. This densely sampled structured dataset will progress the CVGL field towards real-world viability.
 
-## 💾 SpaGBOL: Global Graph-Based Cross-view Geo-localization Dataset 
+## 💾 SpaGBOL: Graph-Based CVGL Dataset 
+
+
 
 ## How to run   
 First, install dependencies   
