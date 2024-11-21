@@ -73,17 +73,26 @@ DFS relates to a vehicle’s movement by mimicking how a vehicle explores one ro
 
 🚧 Under Construction
 
+#### 🏭 Data Download
 ```
 
 ```
 
+#### Submodule Pretraining
 ```
 
 ```
 
+#### BEV-CV Training
 ```
 
 ```
+
+#### BEV-CV Evaluation
+```
+
+```
+
 
 
 ## SpaGBOL: Benchmark Results
