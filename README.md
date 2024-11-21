@@ -265,7 +265,7 @@ DFS relates to a vehicle’s movement by mimicking how a vehicle explores one ro
 </tbody></table>
 
 
-### ✒️ Citation   
+## ✒️ Citation   
 ```
 @InProceedings{Shore_2025_WACV,
     author    = {Shore, Tavis and Mendez, Oscar and Hadfield, Simon},
@@ -275,9 +275,9 @@ DFS relates to a vehicle’s movement by mimicking how a vehicle explores one ro
     year      = {2025}
 }
 ```
-### 📗 Related Works
+## 📗 Related Works
 
-#### 🦜 [BEV-CV: Birds-Eye-View Transform for Cross-View Geo-Localisation](https://tavisshore.co.uk/bevcv)
+### 🦜 [BEV-CV: Birds-Eye-View Transform for Cross-View Geo-Localisation](https://tavisshore.co.uk/bevcv)
 [![Paper](http://img.shields.io/badge/ArXiv-2312.15363-B31B1B.svg)](https://arxiv.org/abs/2312.15363)
 [![Conference](http://img.shields.io/badge/IROS-2024-4b44ce.svg)](https://wacv2025.thecvf.com/)
 [![Project Page](http://img.shields.io/badge/Project-Page-green)](https://tavisshore.co.uk/bevcv/)
