@@ -27,8 +27,10 @@ The map below shows the cities contained in **SpaGBOL v1**, with the breadth and
 
 ### 🧬 City Graph Representations
 
+### 📸 Image Pair Examples
 
-## How to run   
+
+## SpaGBOL: Benchmarking
 First, install dependencies   
 ```bash
 # clone project   
