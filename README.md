@@ -74,19 +74,192 @@ DFS relates to a vehicle’s movement by mimicking how a vehicle explores one ro
 
 ## SpaGBOL: Evaluation
 
-|            FOV |  360° |       |        |        |  180° |       |        |        |  90°  |       |        |        |
-|---------------:|:-----:|:-----:|:------:|:------:|:-----:|:-----:|:------:|:------:|:-----:|:-----:|:------:|:------:|
-|      Model     | Top-1 | Top-5 | Top-10 | Top-1% | Top-1 | Top-5 | Top-10 | Top-1% | Top-1 | Top-5 | Top-10 | Top-1% |
-|     CVM [1]    |  2.87 | 12.96 |  21.51 |  28.33 |  2.68 |  9.83 |  15.12 |  20.23 |  1.02 |  5.87 |  10.15 |  14.81 |
-|    CVFT [2]    |  4.02 | 13.02 |  20.29 |  27.19 |  2.49 |  8.74 |  14.61 |  19.91 |  1.21 |  5.74 |  10.02 |  13.53 |
-|     DSM [3]    |  5.82 | 10.21 |  14.13 |  18.62 |  3.33 |  9.74 |  14.66 |        |  1.59 |  5.87 |  10.11 |  16.24 |
-|    L2LTR [4]   | 11.23 | 31.27 |  42.50 |  49.52 |  5.94 | 18.32 |  28.53 |  35.23 |  6.13 | 18.70 |  27.95 |  34.08 |
-|   GeoDTR+ [5]  | 17.49 | 40.27 |  52.01 |  59.41 |  9.06 | 25.46 |  35.67 |  43.33 |  5.55 | 17.04 |  24.31 |  31.78 |
-|   SAIG-D [6]   | 25.65 | 51.44 |  62.29 |  68.22 | 15.12 | 35.55 |  45.63 |  53.10 |  7.40 | 21.76 |  31.14 |  37.14 |
-| Sample4Geo [7] | 50.80 | 74.22 |  79.96 |  82.32 | 37.52 | 64.52 |  71.92 |  76.39 |  6.51 | 20.61 |  30.31 |  36.12 |
-|     SpaGBOL    | 56.48 | 77.47 |  83.85 |  87.24 | 40.88 | 63.79 |  72.88 |  78.28 | 18.63 | 43.20 |  54.05 |  61.20 |
-|    SpaGBOL+B   | 64.01 | 86.54 |  92.09 |  94.64 | 52.01 | 82.20 |  89.47 |  93.62 |   -   |   -   |    -   |    -   |
-|   SpaGBOL+YB   | 76.13 | 95.21 |  97.96 |  98.98 | 66.82 | 92.69 |  96.38 |  97.30 |   -   |   -   |    -   |    -   |
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-dvpl{border-color:inherit;text-align:right;vertical-align:top}
+.tg .tg-7btt{border-color:inherit;font-weight:bold;text-align:center;vertical-align:top}
+</style>
+<table class="tg"><thead>
+  <tr>
+    <th class="tg-dvpl">FOV</th>
+    <th class="tg-c3ow" colspan="4">360°</th>
+    <th class="tg-c3ow" colspan="4">180°</th>
+    <th class="tg-c3ow" colspan="4">90°</th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td class="tg-c3ow">Model</td>
+    <td class="tg-c3ow">Top-1</td>
+    <td class="tg-c3ow">Top-5</td>
+    <td class="tg-c3ow">Top-10</td>
+    <td class="tg-c3ow">Top-1%</td>
+    <td class="tg-c3ow">Top-1</td>
+    <td class="tg-c3ow">Top-5</td>
+    <td class="tg-c3ow">Top-10</td>
+    <td class="tg-c3ow">Top-1%</td>
+    <td class="tg-c3ow">Top-1</td>
+    <td class="tg-c3ow">Top-5</td>
+    <td class="tg-c3ow">Top-10</td>
+    <td class="tg-c3ow">Top-1%</td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">CVM [1]</td>
+    <td class="tg-c3ow">2.87</td>
+    <td class="tg-c3ow">12.96</td>
+    <td class="tg-c3ow">21.51</td>
+    <td class="tg-c3ow">28.33</td>
+    <td class="tg-c3ow">2.68</td>
+    <td class="tg-c3ow">9.83</td>
+    <td class="tg-c3ow">15.12</td>
+    <td class="tg-c3ow">20.23</td>
+    <td class="tg-c3ow">1.02</td>
+    <td class="tg-c3ow">5.87</td>
+    <td class="tg-c3ow">10.15</td>
+    <td class="tg-c3ow">14.81</td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">CVFT [2]</td>
+    <td class="tg-c3ow">4.02</td>
+    <td class="tg-c3ow">13.02</td>
+    <td class="tg-c3ow">20.29</td>
+    <td class="tg-c3ow">27.19</td>
+    <td class="tg-c3ow">2.49</td>
+    <td class="tg-c3ow">8.74</td>
+    <td class="tg-c3ow">14.61</td>
+    <td class="tg-c3ow">19.91</td>
+    <td class="tg-c3ow">1.21</td>
+    <td class="tg-c3ow">5.74</td>
+    <td class="tg-c3ow">10.02</td>
+    <td class="tg-c3ow">13.53</td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">DSM [3]</td>
+    <td class="tg-c3ow">5.82</td>
+    <td class="tg-c3ow">10.21</td>
+    <td class="tg-c3ow">14.13</td>
+    <td class="tg-c3ow">18.62</td>
+    <td class="tg-c3ow">3.33</td>
+    <td class="tg-c3ow">9.74</td>
+    <td class="tg-c3ow">14.66</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow">1.59</td>
+    <td class="tg-c3ow">5.87</td>
+    <td class="tg-c3ow">10.11</td>
+    <td class="tg-c3ow">16.24</td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">L2LTR [4]</td>
+    <td class="tg-c3ow">11.23</td>
+    <td class="tg-c3ow">31.27</td>
+    <td class="tg-c3ow">42.50</td>
+    <td class="tg-c3ow">49.52</td>
+    <td class="tg-c3ow">5.94</td>
+    <td class="tg-c3ow">18.32</td>
+    <td class="tg-c3ow">28.53</td>
+    <td class="tg-c3ow">35.23</td>
+    <td class="tg-c3ow">6.13</td>
+    <td class="tg-c3ow">18.70</td>
+    <td class="tg-c3ow">27.95</td>
+    <td class="tg-c3ow">34.08</td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">GeoDTR+ [5]</td>
+    <td class="tg-c3ow">17.49</td>
+    <td class="tg-c3ow">40.27</td>
+    <td class="tg-c3ow">52.01</td>
+    <td class="tg-c3ow">59.41</td>
+    <td class="tg-c3ow">9.06</td>
+    <td class="tg-c3ow">25.46</td>
+    <td class="tg-c3ow">35.67</td>
+    <td class="tg-c3ow">43.33</td>
+    <td class="tg-c3ow">5.55</td>
+    <td class="tg-c3ow">17.04</td>
+    <td class="tg-c3ow">24.31</td>
+    <td class="tg-c3ow">31.78</td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">SAIG-D [6]</td>
+    <td class="tg-c3ow">25.65</td>
+    <td class="tg-c3ow">51.44</td>
+    <td class="tg-c3ow">62.29</td>
+    <td class="tg-c3ow">68.22</td>
+    <td class="tg-c3ow">15.12</td>
+    <td class="tg-c3ow">35.55</td>
+    <td class="tg-c3ow">45.63</td>
+    <td class="tg-c3ow">53.10</td>
+    <td class="tg-c3ow">7.40</td>
+    <td class="tg-c3ow">21.76</td>
+    <td class="tg-c3ow">31.14</td>
+    <td class="tg-c3ow">37.14</td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">Sample4Geo [7]</td>
+    <td class="tg-c3ow">50.80</td>
+    <td class="tg-c3ow">74.22</td>
+    <td class="tg-c3ow">79.96</td>
+    <td class="tg-c3ow">82.32</td>
+    <td class="tg-c3ow">37.52</td>
+    <td class="tg-7btt">64.52</td>
+    <td class="tg-c3ow">71.92</td>
+    <td class="tg-c3ow">76.39</td>
+    <td class="tg-c3ow">6.51</td>
+    <td class="tg-c3ow">20.61</td>
+    <td class="tg-c3ow">30.31</td>
+    <td class="tg-c3ow">36.12</td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">SpaGBOL</td>
+    <td class="tg-7btt">56.48</td>
+    <td class="tg-7btt">77.47</td>
+    <td class="tg-7btt">83.85</td>
+    <td class="tg-7btt">87.24</td>
+    <td class="tg-7btt">40.88</td>
+    <td class="tg-c3ow">63.79</td>
+    <td class="tg-7btt">72.88</td>
+    <td class="tg-7btt">78.28</td>
+    <td class="tg-7btt">18.63</td>
+    <td class="tg-7btt">43.20</td>
+    <td class="tg-7btt">54.05</td>
+    <td class="tg-7btt">61.20</td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">SpaGBOL+B</td>
+    <td class="tg-c3ow">64.01</td>
+    <td class="tg-c3ow">86.54</td>
+    <td class="tg-c3ow">92.09</td>
+    <td class="tg-c3ow">94.64</td>
+    <td class="tg-c3ow">52.01</td>
+    <td class="tg-c3ow">82.20</td>
+    <td class="tg-c3ow">89.47</td>
+    <td class="tg-c3ow">93.62</td>
+    <td class="tg-c3ow">-</td>
+    <td class="tg-c3ow">-</td>
+    <td class="tg-c3ow">-</td>
+    <td class="tg-c3ow"></td>
+  </tr>
+  <tr>
+    <td class="tg-c3ow">SpaGBOL+YB</td>
+    <td class="tg-c3ow">76.13</td>
+    <td class="tg-c3ow">95.21</td>
+    <td class="tg-c3ow">97.96</td>
+    <td class="tg-c3ow">98.98</td>
+    <td class="tg-c3ow">66.82</td>
+    <td class="tg-c3ow">92.69</td>
+    <td class="tg-c3ow">96.38</td>
+    <td class="tg-c3ow">97.30</td>
+    <td class="tg-c3ow">-</td>
+    <td class="tg-c3ow">-</td>
+    <td class="tg-c3ow">-</td>
+    <td class="tg-c3ow">-</td>
+  </tr>
+</tbody></table>
+
 
 ### ✒️ Citation   
 ```
