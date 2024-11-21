@@ -22,7 +22,7 @@ The dataset's first version contains 98,855 panoramic streetview images across d
 
 The map below shows the cities contained in **SpaGBOL v1**, with the breadth and density being increased in the next version release.
 
-### 📍 City Locations 🇬🇧🇧🇪🇺🇸🇭🇰🇸🇬
+### 📍 City Locations 🇬🇧🇧🇪🇺🇸🇭🇰🇸🇬🇯🇵
 ![plot_world](https://github.com/user-attachments/assets/e7a7b656-262e-4021-bc79-f9b6619046f3)
 
 ### 🧬 City Graph Representations
@@ -30,7 +30,7 @@ The map below shows the cities contained in **SpaGBOL v1**, with the breadth and
 ### 📸 Image Pair Examples
 
 
-## SpaGBOL: Benchmarking
+## 🧰 SpaGBOL: Benchmarking
 First, install dependencies   
 ```bash
 # clone project   
