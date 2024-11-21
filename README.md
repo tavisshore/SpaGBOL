@@ -1,7 +1,6 @@
 <div align="center">    
  
-# 🌍🚗 SpaGBOL: Spatial-Graph-Based 
-# Orientated Localisation 📡🗺️ 
+# 🌍🚗 SpaGBOL: Spatial-Graph-Based Orientated Localisation 📡🗺️ 
 <p align="middle">
  <a href="https://tavisshore.co.uk/">Tavis Shore</a>
  <a href="https://personalpages.surrey.ac.uk/s.hadfield/biography.html">Simon Hadfield</a>
