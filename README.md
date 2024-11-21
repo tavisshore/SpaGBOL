@@ -6,8 +6,8 @@
 [![Conference](http://img.shields.io/badge/WACV-2025-4b44ce.svg)](https://wacv2025.thecvf.com/)
 [![Project Page](http://img.shields.io/badge/Project-Page-4b44ce.svg)](https://tavisshore.co.uk/spagbol/)
 
-![new_neural](https://github.com/user-attachments/assets/84215eee-31b0-4ca6-871e-cacf329c6347)
-
+![new_neural](https://github.com/user-attachments/assets/84215eee-31b0-4ca6-871e-cacf329c6347#gh-light-mode-only)
+![output-onlinepngtools(1)](https://github.com/user-attachments/assets/377067ca-767a-493d-a299-c4c4b0ef355e#gh-dark-mode-only)
 
 </div>
  
