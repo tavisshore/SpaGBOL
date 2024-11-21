@@ -17,11 +17,14 @@ Cross-View Geo-Localisation within urban regions is challenging in part due to t
 We release **SpaGBOL**, the first graph-based CVGL dataset, consisting of 10 city centre graph networks across the globe. This densely sampled structured dataset will progress the CVGL field towards real-world viability.
 
 ## 💾 SpaGBOL: Graph-Based CVGL Dataset 
-The dataset contains 98,855 panoramic streetview images across different seasons, and 19,771 corresponding satellite images from 10 mostly densely populated international cities. This translates to 5 panoramic images and one satellite image per graph node. To download this dataset, run the scripts outlined below. 
+The dataset's first version contains 98,855 panoramic streetview images across different seasons, and 19,771 corresponding satellite images from 10 mostly densely populated international cities. This translates to 5 panoramic images and one satellite image per graph node. To download this dataset, run the scripts outlined below. 
 
+The map below shows the cities contained in **SpaGBOL v1**, with the breadth and density being increased in the next version release.
+
+### 📍 City Locations 🇬🇧🇧🇪🇺🇸🇭🇰🇸🇬
 ![plot_world](https://github.com/user-attachments/assets/e7a7b656-262e-4021-bc79-f9b6619046f3)
 
-
+### 🧬 City Graph Representations
 
 
 ## How to run   
