@@ -60,7 +60,7 @@ The map below shows the cities contained in **SpaGBOL v1**, with the breadth and
 Graph networks can be traversed using Breadth-First Search (BFS) or Depth-First Search (DFS). BFS explores level by level, visiting all neighbors of a node before moving deeper, using a queue. DFS dives into a branch fully before backtracking, often using a stack or recursion. BFS is ideal for shortest paths, while DFS suits tasks like cycle detection or exploring all paths.
 
 #### Vehicle Walk
-DFS relates to a vehicle’s movement by mimicking how a vehicle explores one route fully before backtracking to try alternatives. This approach is useful for navigating unmapped areas or exploring all possible routes systematically. Our reference set walks from the graph contains an exhaustive sampling of each node. At inference time, retrieving any one of these random walks is denoted correct - as long as it returns the correct latest primary node.
+DFS relates to a vehicle’s movement by mimicking how a vehicle explores one route fully before backtracking to try alternatives. This approach is useful for navigating unmapped areas or exploring all possible routes systematically. Our reference set walks from the graph contains an exhaustive sampling of each node. At inference time, retrieving any one of these random walks is denoted correct.
 
 
 
