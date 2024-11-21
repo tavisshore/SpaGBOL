@@ -1,6 +1,11 @@
 <div align="center">    
  
 # 🌍🚗 SpaGBOL: Spatial-Graph-Based Orientated Localisation 📡🗺️ 
+<p align="middle">
+ <a href="https://tavisshore.co.uk/">Tavis Shore</a>
+ <a href="https://personalpages.surrey.ac.uk/s.hadfield/biography.html">Simon Hadfield</a>
+ <a href="https://cvssp.org/Personal/OscarMendez/index.html">Oscar Mendez</a>
+</p>
 
 [![Paper](http://img.shields.io/badge/ArXiv-2409.15514-B31B1B.svg)](https://arxiv.org/abs/2409.15514)
 [![Conference](http://img.shields.io/badge/WACV-2025-4b44ce.svg)](https://wacv2025.thecvf.com/)
