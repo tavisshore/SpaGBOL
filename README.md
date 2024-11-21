@@ -35,6 +35,7 @@ The map below shows the cities contained in **SpaGBOL v1**, with the breadth and
   <img src="/img3.png" width="32%" />
 </p>
 
+### 🚶 Exhaustive / Random Depth-First Walk Generation
 
 
 ## 🧰 SpaGBOL: Benchmarking
