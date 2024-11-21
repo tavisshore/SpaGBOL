@@ -39,8 +39,8 @@ The map below shows the cities contained in **SpaGBOL v1**, with the breadth and
 <div>
 <img align="left" width="40%" src="https://github.com/user-attachments/assets/3b1d254e-2052-47f8-8e13-a70286ee71c3">
 
-Explanation here
-
+#### Graph Walk
+Graph networks can be traversed using Breadth-First Search (BFS) or Depth-First Search (DFS). BFS explores level by level, visiting all neighbors of a node before moving deeper, using a queue. DFS dives into a branch fully before backtracking, often using a stack or recursion. BFS is ideal for shortest paths, while DFS suits tasks like cycle detection or exploring all paths.
  
 </div>
 
