@@ -261,4 +261,19 @@ DFS relates to a vehicle’s movement by mimicking how a vehicle explores one ro
     month     = {February},
     year      = {2025}
 }
-```   
+```
+### Related Works
+
+#### BEV-CV: Birds-Eye-View Transform for Cross-View Geo-Localisation
+[![Paper](http://img.shields.io/badge/ArXiv-2312.15363-B31B1B.svg)](https://arxiv.org/abs/2312.15363)
+[![Conference](http://img.shields.io/badge/IROS-2024-4b44ce.svg)](https://wacv2025.thecvf.com/)
+[![Project Page](http://img.shields.io/badge/Project-Page-green)](https://tavisshore.co.uk/bevcv/)
+```
+@INPROCEEDINGS{bevcv,
+    author={Shore, Tavis and Hadfield, Simon and Mendez, Oscar },
+    booktitle={2024 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)}, 
+    title={BEV-CV: Birds-Eye-View Transform for Cross-View Geo-Localisation}, 
+    year={2024},
+    pages={11047-11054},
+}
+```
