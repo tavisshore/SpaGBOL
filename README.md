@@ -6,7 +6,8 @@
 [![Conference](http://img.shields.io/badge/WACV-2025-4b44ce.svg)](https://wacv2025.thecvf.com/)
 [![Project Page](http://img.shields.io/badge/Project-Page-4b44ce.svg)](https://tavisshore.co.uk/spagbol/)
 
-![Uploading new_neural.png…]()
+![new_neural](https://github.com/user-attachments/assets/84215eee-31b0-4ca6-871e-cacf329c6347)
+
 
 </div>
  
@@ -19,10 +20,14 @@ We release **SpaGBOL**, the first graph-based CVGL dataset, consisting of 10 cit
 First, install dependencies   
 ```bash
 # clone project   
-git clone https://github.com/YourGithubName/deep-learning-project-template
+git clone https://github.com/tavisshore/SpaGBOL
 
 # install project   
-cd deep-learning-project-template 
+cd SpaGBOL/
+
+conda env create -n spagbol python=3.9![new_neural](https://github.com/user-attachments/assets/b962794d-9b76-48e4-9b3f-e5b12302dc57)
+
+
 pip install -e .   
 pip install -r requirements.txt
  ```   
