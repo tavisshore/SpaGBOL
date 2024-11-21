@@ -7,7 +7,8 @@
 [![Project Page](http://img.shields.io/badge/Project-Page-4b44ce.svg)](https://tavisshore.co.uk/spagbol/)
 
 ![new_neural](https://github.com/user-attachments/assets/84215eee-31b0-4ca6-871e-cacf329c6347#gh-light-mode-only)
-![output-onlinepngtools(1)](https://github.com/user-attachments/assets/377067ca-767a-493d-a299-c4c4b0ef355e#gh-dark-mode-only)
+![spagbol_diagram](https://github.com/user-attachments/assets/4f3d921f-c24b-409f-a2e7-c9669a4d98a6#gh-dark-mode-only)
+
 
 </div>
  
