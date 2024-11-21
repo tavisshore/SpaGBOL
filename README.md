@@ -86,9 +86,7 @@ DFS relates to a vehicle’s movement by mimicking how a vehicle explores one ro
 ```
 
 
-## SpaGBOL: Evaluation
-
-
+## SpaGBOL: Benchmark Results
 
 <table class="tg"><thead>
   <tr>
