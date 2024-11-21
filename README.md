@@ -29,7 +29,7 @@ The map below shows the cities contained in **SpaGBOL v1**, with the breadth and
 
 ### 📸 Image Pair Examples
 
-![example_images_1](https://github.com/user-attachments/assets/3786d88f-a9bc-49bd-803d-5e1649a74566){ width=300px align=left }
+![example_images_1](https://github.com/user-attachments/assets/3786d88f-a9bc-49bd-803d-5e1649a74566){ align=left }
 
 
 
