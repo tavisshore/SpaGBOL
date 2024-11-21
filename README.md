@@ -64,10 +64,11 @@ trainer.test(test_dataloaders=test)
 
 ### Citation   
 ```
-@article{YourName,
-  title={Your Title},
-  author={Your team},
-  journal={Location},
-  year={Year}
+@InProceedings{Shore_2025_WACV,
+    author    = {Shore, Tavis and Mendez, Oscar and Hadfield, Simon},
+    title     = {SpaGBOL: Spatial-Graph-Based Orientated Localisation},
+    booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+    month     = {February},
+    year      = {2025}
 }
 ```   
