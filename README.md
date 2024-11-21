@@ -6,6 +6,12 @@
  <a href="https://personalpages.surrey.ac.uk/s.hadfield/biography.html">Simon Hadfield</a>
  <a href="https://cvssp.org/Personal/OscarMendez/index.html">Oscar Mendez</a>
 </p>
+<p align="middle">
+ <a href="https://www.surrey.ac.uk/centre-vision-speech-signal-processing">Centre for Vision, Speech, and Signal Processing (CVSSP)</a>
+</p>
+<p align="middle">
+ <a>University Campus, Guildford, GU2 7XH, United Kingdom </a>
+</p>
 
 [![Paper](http://img.shields.io/badge/ArXiv-2409.15514-B31B1B.svg)](https://arxiv.org/abs/2409.15514)
 [![Conference](http://img.shields.io/badge/WACV-2025-4b44ce.svg)](https://wacv2025.thecvf.com/)
