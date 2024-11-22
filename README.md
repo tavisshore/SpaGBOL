@@ -92,7 +92,7 @@ DFS relates to a vehicle’s movement by mimicking how a vehicle explores one ro
 
 #### 🐍 Environment Setup
 ```
-
+conda env create -f environment.yml
 ```
 
 #### 🏭 Data Download
