@@ -40,8 +40,8 @@ The map below shows the cities contained in **SpaGBOL v1**, with the breadth and
 ### 🧬 City Graph Representations
 <p align="middle">
   <img src="https://github.com/user-attachments/assets/971867e9-ddcb-4df3-916b-e7fdc4ef2e97" width="32%" />
-  <img src="[/img2.png](https://github.com/user-attachments/assets/1ff9b9fc-d0ca-4697-a501-310433b08956)" width="32%" /> 
-  <img src="[/img3.png](https://github.com/user-attachments/assets/4c136979-6fd6-47d0-9ea0-516d6092ad72)" width="32%" />
+  <img src="https://github.com/user-attachments/assets/1ff9b9fc-d0ca-4697-a501-310433b08956" width="32%" /> 
+  <img src="https://github.com/user-attachments/assets/4c136979-6fd6-47d0-9ea0-516d6092ad72" width="32%" />
 </p>
 
 ### 📸 Image Pair Examples
