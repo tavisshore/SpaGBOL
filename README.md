@@ -290,8 +290,6 @@ If you find SpaGBOL useful for your work please cite:
 }
 ```
 ## 📗 Related Works
-If you find SpaGBOL useful for your work, you may find my similar works valuable:
-
 ### 🦜 [BEV-CV: Birds-Eye-View Transform for Cross-View Geo-Localisation](https://github.com/tavisshore/BEV-CV)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [![Paper](http://img.shields.io/badge/ArXiv-2312.15363-B31B1B.svg)](https://arxiv.org/abs/2312.15363)
