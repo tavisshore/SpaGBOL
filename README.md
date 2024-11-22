@@ -279,6 +279,7 @@ DFS relates to a vehicle’s movement by mimicking how a vehicle explores one ro
 
 
 ## ✒️ Citation   
+If you find SpaGBOL useful for your work please cite:
 ```
 @InProceedings{Shore_2025_WACV,
     author    = {Shore, Tavis and Mendez, Oscar and Hadfield, Simon},
