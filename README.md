@@ -54,9 +54,9 @@ The map below shows the cities contained in **SpaGBOL v1**, with the breadth and
   </tr>
 
   <tr>
-    <td>City of London Graph</td>
-    <td>Manhattan Graph</td>
-    <td>Tokyo Graph</td>
+    <td style='text-align:center; vertical-align:middle'>City of London Graph</td>
+    <td style='text-align:center; vertical-align:middle'>Manhattan Graph</td>
+    <td style='text-align:center; vertical-align:middle'>Tokyo Graph</td>
   </tr>
 </table>
 </p>
