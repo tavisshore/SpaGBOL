@@ -55,9 +55,9 @@ Here are a few of the city centre graph networks, where nodes represent road jun
   </tr>
 
   <tr>
-    <td style='text-align:center; vertical-align:middle'>City of London Graph</td>
-    <td style='text-align:center; vertical-align:middle'>Manhattan Graph</td>
-    <td style='text-align:center; vertical-align:middle'>Tokyo Graph</td>
+    <td style='text-align:center; vertical-align:middle'>City of London</td>
+    <td style='text-align:center; vertical-align:middle'>Manhattan Centre</td>
+    <td style='text-align:center; vertical-align:middle'>Tokyo Centre</td>
   </tr>
 </table>
 </p>
