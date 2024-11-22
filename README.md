@@ -105,12 +105,12 @@ conda env create -f requirements.yaml
 
 ```
 
-#### 👟 BEV-CV Training
+#### 👟 SpaGBOL Training
 ```
 
 ```
 
-#### 🧐 BEV-CV Evaluation
+#### 🧐 SpaGBOL Evaluation
 ```
 
 ```
