@@ -38,15 +38,10 @@ The map below shows the cities contained in **SpaGBOL v1**, with the breadth and
 ![plot_world](https://github.com/user-attachments/assets/e7a7b656-262e-4021-bc79-f9b6619046f3)
 
 ### 🧬 City Graph Representations
-
-
-
-
 <p align="middle">
-   <div width="32%">
-      ![london_dark](https://github.com/user-attachments/assets/47be6d17-88c0-418f-baea-f5a1414ec2c3#gh-dark-mode-only)
-   
-   </div>
+  <img src="https://github.com/user-attachments/assets/971867e9-ddcb-4df3-916b-e7fdc4ef2e97" width="32%" />
+  <img src="[/img2.png](https://github.com/user-attachments/assets/1ff9b9fc-d0ca-4697-a501-310433b08956)" width="32%" /> 
+  <img src="[/img3.png](https://github.com/user-attachments/assets/4c136979-6fd6-47d0-9ea0-516d6092ad72)" width="32%" />
 </p>
 
 ### 📸 Image Pair Examples
