@@ -126,7 +126,7 @@ DFS relates to a vehicle’s movement by mimicking how a vehicle explores one ro
     <td class="tg-c3ow">Top-1%</td>
   </tr>
   <tr>
-    <td class="tg-c3ow">CVM [1]</td>
+    <td class="tg-c3ow">CVM</td>
     <td class="tg-c3ow">2.87</td>
     <td class="tg-c3ow">12.96</td>
     <td class="tg-c3ow">21.51</td>
@@ -141,7 +141,7 @@ DFS relates to a vehicle’s movement by mimicking how a vehicle explores one ro
     <td class="tg-c3ow">14.81</td>
   </tr>
   <tr>
-    <td class="tg-c3ow">CVFT [2]</td>
+    <td class="tg-c3ow">CVFT</td>
     <td class="tg-c3ow">4.02</td>
     <td class="tg-c3ow">13.02</td>
     <td class="tg-c3ow">20.29</td>
@@ -156,7 +156,7 @@ DFS relates to a vehicle’s movement by mimicking how a vehicle explores one ro
     <td class="tg-c3ow">13.53</td>
   </tr>
   <tr>
-    <td class="tg-c3ow">DSM [3]</td>
+    <td class="tg-c3ow">DSM</td>
     <td class="tg-c3ow">5.82</td>
     <td class="tg-c3ow">10.21</td>
     <td class="tg-c3ow">14.13</td>
@@ -171,7 +171,7 @@ DFS relates to a vehicle’s movement by mimicking how a vehicle explores one ro
     <td class="tg-c3ow">16.24</td>
   </tr>
   <tr>
-    <td class="tg-c3ow">L2LTR [4]</td>
+    <td class="tg-c3ow">L2LTR</td>
     <td class="tg-c3ow">11.23</td>
     <td class="tg-c3ow">31.27</td>
     <td class="tg-c3ow">42.50</td>
@@ -186,7 +186,7 @@ DFS relates to a vehicle’s movement by mimicking how a vehicle explores one ro
     <td class="tg-c3ow">34.08</td>
   </tr>
   <tr>
-    <td class="tg-c3ow">GeoDTR+ [5]</td>
+    <td class="tg-c3ow">GeoDTR+</td>
     <td class="tg-c3ow">17.49</td>
     <td class="tg-c3ow">40.27</td>
     <td class="tg-c3ow">52.01</td>
@@ -201,7 +201,7 @@ DFS relates to a vehicle’s movement by mimicking how a vehicle explores one ro
     <td class="tg-c3ow">31.78</td>
   </tr>
   <tr>
-    <td class="tg-c3ow">SAIG-D [6]</td>
+    <td class="tg-c3ow">SAIG-D</td>
     <td class="tg-c3ow">25.65</td>
     <td class="tg-c3ow">51.44</td>
     <td class="tg-c3ow">62.29</td>
@@ -216,7 +216,7 @@ DFS relates to a vehicle’s movement by mimicking how a vehicle explores one ro
     <td class="tg-c3ow">37.14</td>
   </tr>
   <tr>
-    <td class="tg-c3ow">Sample4Geo [7]</td>
+    <td class="tg-c3ow">Sample4Geo</td>
     <td class="tg-c3ow">50.80</td>
     <td class="tg-c3ow">74.22</td>
     <td class="tg-c3ow">79.96</td>
