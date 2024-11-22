@@ -39,9 +39,9 @@ The map below shows the cities contained in **SpaGBOL v1**, with the breadth and
 
 ### 🧬 City Graph Representations
 <p align="middle">
-   <img src="https://github.com/user-attachments/assets/971867e9-ddcb-4df3-916b-e7fdc4ef2e97" width="32%" alt="London Graph"/>
-   <img src="https://github.com/user-attachments/assets/1ff9b9fc-d0ca-4697-a501-310433b08956" width="32%" alt="Manhattan Graph"/> 
-    <img src="https://github.com/user-attachments/assets/4c136979-6fd6-47d0-9ea0-516d6092ad72" width="32%" alt="Tokyo Graph"/>
+   <img src="https://github.com/user-attachments/assets/864770d8-055e-410b-b034-448f2eb0e5d5" width="32%" alt="London Graph"/>
+   <img src="https://github.com/user-attachments/assets/2b6073f8-8fec-4fa9-993b-9cd5d5d3d218" width="32%" alt="Manhattan Graph"/> 
+    <img src="https://github.com/user-attachments/assets/4c610cb6-1f8a-441a-adaa-b2147dd0bc9d" width="32%" alt="Tokyo Graph"/>
 </p>
 
 ### 📸 Image Pair Examples
