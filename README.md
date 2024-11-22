@@ -66,9 +66,9 @@ Here are a few of the city centre graph networks, where nodes represent road jun
 At each graph node, streetview and satellite images are collected at a ratio of 5:1 to improve training generalisation, here are some examples from across the globe.
 
 <p align="middle">
-  <img src="" width="32%" />
-  <img src="/img2.png" width="32%" /> 
-  <img src="/img3.png" width="32%" />
+  <img src="https://github.com/user-attachments/assets/ed234988-8014-4ba9-80af-97eb2b5a7d88" width="32%" />
+  <img src="https://github.com/user-attachments/assets/4ccf0b79-d3a4-4d02-9929-6b2c2266e056" width="32%" /> 
+  <img src="https://github.com/user-attachments/assets/74d77ab5-8a9e-4104-babc-8b7c9b56b644" width="32%" />
 </p>
 
 ### 🚶 Exhaustive / Random Depth-First Walk Generation
