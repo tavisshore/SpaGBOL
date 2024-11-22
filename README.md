@@ -38,6 +38,7 @@ The map below shows the cities contained in **SpaGBOL v1**, with the breadth and
 ![plot_world](https://github.com/user-attachments/assets/e7a7b656-262e-4021-bc79-f9b6619046f3)
 
 ### 🧬 City Graph Representations
+Here are a few of the city centre graph networks, where nodes represent road junctions, and edges represent the roads between junctions.
 
 <p align="middle">
 <table>
