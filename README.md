@@ -39,16 +39,12 @@ The map below shows the cities contained in **SpaGBOL v1**, with the breadth and
 
 ### 🧬 City Graph Representations
 <p align="middle">
- <figure>
    <img src="https://github.com/user-attachments/assets/971867e9-ddcb-4df3-916b-e7fdc4ef2e97" width="32%" alt="London Graph"/>
    <figcaption> City of London Graph </figcaption>
- </figure>
    <img src="https://github.com/user-attachments/assets/1ff9b9fc-d0ca-4697-a501-310433b08956" width="32%" alt="Manhattan Graph"/> 
    <figcaption> Manhattan Graph </figcaption>
- <figure>
     <img src="https://github.com/user-attachments/assets/4c136979-6fd6-47d0-9ea0-516d6092ad72" width="32%" alt="Tokyo Graph"/>
     <figcaption> Tokyo Graph </figcaption>
- </figure>
 </p>
 
 ### 📸 Image Pair Examples
