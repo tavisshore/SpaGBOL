@@ -41,15 +41,15 @@ The map below shows the cities contained in **SpaGBOL v1**, with the breadth and
 
 <p align="middle">
   <figure class="display: inline-block;">
-    <img src="https://github.com/user-attachments/assets/864770d8-055e-410b-b034-448f2eb0e5d5" width="32%" alt="London Graph"/>
+    <img src="https://github.com/user-attachments/assets/864770d8-055e-410b-b034-448f2eb0e5d5" width="30%" alt="London Graph"/>
     <figcaption>Caption goes here</figcaption>
   </figure>
   <figure class="display: inline-block;">
-    <img src="https://github.com/user-attachments/assets/2b6073f8-8fec-4fa9-993b-9cd5d5d3d218" width="32%" alt="Manhattan Graph"/> 
+    <img src="https://github.com/user-attachments/assets/2b6073f8-8fec-4fa9-993b-9cd5d5d3d218" width="30%" alt="Manhattan Graph"/> 
     <figcaption>Caption goes here</figcaption>
   </figure>
   <figure class="display: inline-block;">
-    <img src="https://github.com/user-attachments/assets/4c610cb6-1f8a-441a-adaa-b2147dd0bc9d" width="32%" alt="Tokyo Graph"/>
+    <img src="https://github.com/user-attachments/assets/4c610cb6-1f8a-441a-adaa-b2147dd0bc9d" width="30%" alt="Tokyo Graph"/>
     <figcaption>Caption goes here</figcaption>
   </figure>
 
