@@ -8,6 +8,8 @@ _C = CN()
 _C.data = '/scratch/datasets/'
 _C.dataroot = 'data/images/'
 _C.savedir = 'data'
+
+
 _C.lr = 1e-4
 _C.dataset = 'spagbol'
 _C.batch_size = 16

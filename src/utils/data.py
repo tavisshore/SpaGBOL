@@ -671,16 +671,15 @@ class GraphData():
 
     def prepare_graph(self, point=None, stage='train'):
         # Download graph or open if available
-        if not Path(f'/scratch/projects/graphgl/data/spagbol/graphs/raw/graph_{point}_{self.args.width}.pt').is_file():
-            print(f'PATH: {self.args.data}')
+        if not Path(f'{self.args.data}/spagbol/graphs/raw/graph_{point}_{self.args.width}.pt').is_file():
             corpus_graph = self.create_graph(centre=point, dist=self.args.width, cwd=self.args.path, workers=self.args.workers)
             torch.save(corpus_graph, f'{self.args.path}/data/{self.args.dataset}/graphs/raw/graph_{point}_{self.args.width}.pt')
             src_images = Path(f'{self.args.path}/data/{self.args.dataset}/images/raw/')
             dst_database = Path(f'{self.args.path}/data/{self.args.dataset}/images/lmdb/')
             image_paths = {image_path.stem: image_path for image_path in sorted(src_images.rglob(f"*jpg"))}
-            write_database(image_paths, dst_database) # UNCOMMENT ONCE COMPLETED YAWS STUFF
+            write_database(image_paths, dst_database) # Write to LMDB
         else: 
-            corpus_graph = torch.load(f'/scratch/projects/graphgl/data/spagbol/graphs/raw/graph_{point}_{self.args.width}.pt')
+            corpus_graph = torch.load(f'{self.args.data}/spagbol/graphs/raw/graph_{point}_{self.args.width}.pt')
             
         if stage == 'train': 
             self.graphs[point] = corpus_graph
@@ -991,12 +990,10 @@ class GraphDataset(Dataset):
 
 
 if __name__ == '__main__':
-
-    from ..configs.config import return_defaults
+    # If this file is run directly - download SpaGBOL data
+    from configs.config import return_defaults
 
     args = return_defaults()
+
     graphs = GraphData(args)
     dataset = GraphDataset(args, graphs, stage='train')
-    print(len(dataset))
-    print(dataset[0])
-
