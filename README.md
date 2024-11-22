@@ -63,6 +63,7 @@ Here are a few of the city centre graph networks, where nodes represent road jun
 </p>
 
 ### 📸 Image Pair Examples
+At each graph node, streetview and satellite images are collected at a ratio of 5:1 to improve training generalisation, here are some examples from across the globe.
 
 <p align="middle">
   <img src="https://github.com/user-attachments/assets/27a5bd83-3f6d-4c31-a619-88c289d02fef" width="32%" />
