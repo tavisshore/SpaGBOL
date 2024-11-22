@@ -32,7 +32,7 @@ We release 🍝 **SpaGBOL** 🍝, the first graph-based CVGL dataset, consisting
 ## 💾 SpaGBOL: Graph-Based CVGL Dataset 
 The dataset's first version contains 98,855 panoramic streetview images across different seasons, and 19,771 corresponding satellite images from 10 mostly densely populated international cities. This translates to 5 panoramic images and one satellite image per graph node. Downloading instructions below.
 
-The map below shows the cities contained in **SpaGBOL v1**, with the breadth and density being increased in the next version release.
+The map below shows the cities contained in **SpaGBOL v1**, with the breadth and density being increased in subsequent versions.
 
 ### 📍 City Locations 🇬🇧🇧🇪🇺🇸🇭🇰🇸🇬🇯🇵
 ![plot_world](https://github.com/user-attachments/assets/e7a7b656-262e-4021-bc79-f9b6619046f3)
