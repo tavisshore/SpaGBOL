@@ -18,9 +18,6 @@
 [![arxiv](https://img.shields.io/badge/cs.LG-2409.15514-b31b1b?style=flat&logo=arxiv&logoColor=red)](https://arxiv.org/abs/2409.15514)
 [![Conference](http://img.shields.io/badge/WACV-2025-4b44ce.svg)](https://wacv2025.thecvf.com/)
 [![Project Page](http://img.shields.io/badge/Project-Page-green)](https://tavisshore.co.uk/spagbol/)
-[![Paperswithcode](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/paper/spagbol-spatial-graph-based-orientated)]()
-
-
 [![License](https://img.shields.io/badge/license-MIT-blue)]()
 [![Visits Badge](https://badges.pufler.dev/visits/tavisshore/SpaGBOL)](https://github.com/tavisshore/SpaGBOL)
 
