@@ -317,3 +317,7 @@ If you find SpaGBOL useful for your work please cite:
 [![GitHub](https://img.shields.io/badge/GitHub-BEVCV-%23121011.svg?logo=github&logoColor=white)](https://github.com/tavisshore/bevcv)
 [![License](https://img.shields.io/badge/license-MIT-blue)]()
 
+## Star History
+ 
+[![Star History Chart](https://api.star-history.com/svg?repos=tavisshore/BEV-CV&type=Date)](https://star-history.com/#tavisshore/BEV-CV&Date)
+
