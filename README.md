@@ -311,7 +311,7 @@ If you find SpaGBOL useful for your work please cite:
 ## 📗 Related Works
 ### 🦜 [BEV-CV: Birds-Eye-View Transform for Cross-View Geo-Localisation](https://github.com/tavisshore/BEV-CV)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-[![Paper](http://img.shields.io/badge/ArXiv-2312.15363-B31B1B.svg)](https://arxiv.org/abs/2312.15363)
+[![arxiv](https://img.shields.io/badge/cs.LG-2312.15363-b31b1b?style=flat&logo=arxiv&logoColor=red)](https://arxiv.org/abs/2312.15363)
 [![Conference](http://img.shields.io/badge/IROS-2024-4b44ce.svg)](https://wacv2025.thecvf.com/)
 [![Project Page](http://img.shields.io/badge/Project-Page-green)](https://tavisshore.co.uk/bevcv/)
 [![GitHub](https://img.shields.io/badge/GitHub-BEVCV-%23121011.svg?logo=github&logoColor=white)](https://github.com/tavisshore/bevcv)
