@@ -319,6 +319,12 @@ If you find SpaGBOL useful for your work please cite:
 [![License](https://img.shields.io/badge/license-MIT-blue)]()
 
 ## ⭐ Star History
- 
-[![Star History Chart](https://api.star-history.com/svg?repos=tavisshore/SpaGBOL&type=Date)](https://star-history.com/#tavisshore/SpaGBOL&Date)
+
+ <a href="https://star-history.com/#tavisshore/SpaGBOL&Date" align="middle">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=tavisshore/SpaGBOL&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=tavisshore/SpaGBOL&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=tavisshore/SpaGBOL&type=Date" />
+ </picture>
+</a>
 
