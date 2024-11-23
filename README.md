@@ -319,5 +319,5 @@ If you find SpaGBOL useful for your work please cite:
 
 ## ⭐ Star History
  
-[![Star History Chart](https://api.star-history.com/svg?repos=tavisshore/BEV-CV&type=Date)](https://star-history.com/#tavisshore/BEV-CV&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=tavisshore/SpaGBOL&type=Date)](https://star-history.com/#tavisshore/SpaGBOL&Date)
 
