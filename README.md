@@ -23,7 +23,7 @@
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/spagbol-spatial-graph-based-orientated/cross-view-geo-localisation-on-spagbol)](https://paperswithcode.com/sota/cross-view-geo-localisation-on-spagbol?p=spagbol-spatial-graph-based-orientated)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/spagbol-spatial-graph-based-orientated/cross-view-geo-localisation-on-spagbol-180deg)](https://paperswithcode.com/sota/cross-view-geo-localisation-on-spagbol-180deg?p=spagbol-spatial-graph-based-orientated)
-
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/spagbol-spatial-graph-based-orientated/cross-view-geo-localisation-on-spagbol-90deg)](https://paperswithcode.com/sota/cross-view-geo-localisation-on-spagbol-90deg?p=spagbol-spatial-graph-based-orientated)
 
 ![new_neural](https://github.com/user-attachments/assets/84215eee-31b0-4ca6-871e-cacf329c6347#gh-light-mode-only)
 ![spagbol_diagram](https://github.com/user-attachments/assets/4f3d921f-c24b-409f-a2e7-c9669a4d98a6#gh-dark-mode-only)
