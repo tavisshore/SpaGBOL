@@ -79,7 +79,7 @@ At each graph node, streetview and satellite images are collected at a ratio of 
 
 ### 🚶 Exhaustive / Random Depth-First Walk Generation
 <div>
-<img align="left" width="50%" src="https://github.com/user-attachments/assets/6e9aba0f-8b5b-4eff-923f-513d8df1e33e">
+<img align="left" width="45%" src="https://github.com/user-attachments/assets/6e9aba0f-8b5b-4eff-923f-513d8df1e33e">
 
 #### Graph Walk
 Graph networks can be traversed using Breadth-First Search (BFS) or Depth-First Search (DFS). BFS explores level by level, visiting all neighbors of a node before moving deeper, using a queue. DFS dives into a branch fully before backtracking, often using a stack or recursion. BFS is ideal for shortest paths, while DFS suits tasks like cycle detection or exploring all paths.
