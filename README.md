@@ -86,10 +86,10 @@ Graph networks can be traversed using Breadth-First Search (BFS) or Depth-First 
 
 #### Vehicle Walk
 DFS relates to a vehicle’s movement by mimicking how a vehicle explores one route fully before backtracking to try alternatives. This approach is useful for navigating unmapped areas or exploring all possible routes systematically. Our reference set walks from the graph contains an exhaustive sampling of each node. At inference time, retrieving any one of these random walks is deemed to be correct.
-
-
-
 </div>
+
+
+![walk_gif_dark](https://github.com/user-attachments/assets/6e9aba0f-8b5b-4eff-923f-513d8df1e33e)
 
 
 ---
