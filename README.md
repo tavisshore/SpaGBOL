@@ -79,7 +79,7 @@ At each graph node, streetview and satellite images are collected at a ratio of 
 
 ### 🚶 Exhaustive / Random Depth-First Walk Generation
 <div>
-<img align="left" width="50%" src="https://github.com/user-attachments/assets/3a44f59e-a965-45ae-af11-03df6a81117d">
+<img align="left" width="50%" src="[https://github.com/user-attachments/assets/3a44f59e-a965-45ae-af11-03df6a81117d](https://github.com/user-attachments/assets/6e9aba0f-8b5b-4eff-923f-513d8df1e33e)">
 
 #### Graph Walk
 Graph networks can be traversed using Breadth-First Search (BFS) or Depth-First Search (DFS). BFS explores level by level, visiting all neighbors of a node before moving deeper, using a queue. DFS dives into a branch fully before backtracking, often using a stack or recursion. BFS is ideal for shortest paths, while DFS suits tasks like cycle detection or exploring all paths.
@@ -87,10 +87,6 @@ Graph networks can be traversed using Breadth-First Search (BFS) or Depth-First 
 #### Vehicle Walk
 DFS relates to a vehicle’s movement by mimicking how a vehicle explores one route fully before backtracking to try alternatives. This approach is useful for navigating unmapped areas or exploring all possible routes systematically. Our reference set walks from the graph contains an exhaustive sampling of each node. At inference time, retrieving any one of these random walks is deemed to be correct.
 </div>
-
-
-![walk_gif_dark](https://github.com/user-attachments/assets/6e9aba0f-8b5b-4eff-923f-513d8df1e33e)
-
 
 ---
 ## 🧰 SpaGBOL: Benchmarking
