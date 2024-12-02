@@ -1,7 +1,4 @@
-# 🚧 Finalising Code
-
-<div align="center">    
- 
+<div align="center">     
 # 🌍🚗 SpaGBOL: Spatial-Graph-Based Orientated Localisation 📡🗺️ 
 <p align="middle">
  <a href="https://tavisshore.co.uk/">Tavis Shore</a>
@@ -90,7 +87,7 @@ DFS relates to a vehicle’s movement by mimicking how a vehicle explores routes
 ---
 ## 🧰 SpaGBOL: Benchmarking
 
-🚧 Under Construction
+🚧 Code still being polished...
 
 #### 🐍 Environment Setup
 ```bash
