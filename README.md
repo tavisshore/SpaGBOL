@@ -93,27 +93,28 @@ DFS relates to a vehicle’s movement by mimicking how a vehicle explores routes
 🚧 Under Construction
 
 #### 🐍 Environment Setup
-```
+```bash
 conda env create -f requirements.yaml
 ```
 
 #### 🏭 Data Download
-```
-
+To download the **SpaGBOL** dataset, set the desired arguments at the bottom of ```src/utils/data.py``` and run the file.
+```python 
+python src/utils/data.py
 ```
 
 #### ☕ Submodule Pretraining
-```
+```python 
 
 ```
 
 #### 👟 SpaGBOL Training
-```
+```python 
 
 ```
 
 #### 🧐 SpaGBOL Evaluation
-```
+```python 
 
 ```
 
