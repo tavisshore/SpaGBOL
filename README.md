@@ -177,7 +177,7 @@ python run.py --data 'datapath' --fov 360 --walk 4
     <td class="tg-c3ow">3.33</td>
     <td class="tg-c3ow">9.74</td>
     <td class="tg-c3ow">14.66</td>
-    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow">21.48</td>
     <td class="tg-c3ow">1.59</td>
     <td class="tg-c3ow">5.87</td>
     <td class="tg-c3ow">10.11</td>
