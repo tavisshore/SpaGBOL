@@ -1,6 +1,5 @@
-
+#!/usr/bin/env python3
 from pathlib import Path
-
 from torch_geometric.utils import from_networkx
 from tqdm import tqdm
 import numpy as np
@@ -16,8 +15,6 @@ import concurrent.futures
 import threading
 import hashlib
 import requests
-import shapefile
-import shapely.geometry
 from PIL import Image, ImageEnhance, ImageOps
 import ray
 from ray.experimental import tqdm_ray
@@ -25,19 +22,15 @@ import osmnx as ox
 import networkx as nx
 import torchvision.transforms as T
 import torchvision.transforms.functional as F
-import torchvision
 from streetview import search_panoramas, get_panorama
 from haversine import haversine, Unit
-from pathlib import Path
 from geographiclib.geodesic import Geodesic
 import polarTransform
 import cv2
+from datetime import datetime
+from guillame import ImageDatabase
+from write_db import write_database
 
-from utils.guillame import ImageDatabase
-from utils.write_db import write_database
-
-
-torchvision.disable_beta_transforms_warning()
 Image.MAX_IMAGE_PIXELS = None
 TILE_SIZE = 256 
 EARTH_CIRCUMFERENCE = 40075.016686 * 1000  
@@ -47,11 +40,7 @@ USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.
 LOGGER = None
 VERBOSITY = None
 
-resize_pov = T.Resize((256, 256), antialias=True)
-resize_pano = T.Resize((512, 2048), antialias=True)
 to_ten = T.ToTensor()
-to_pil = T.ToPILImage()
-
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
@@ -155,8 +144,6 @@ class GeoPoint:
         if direction.is_oblique(): x, y = ObliqueWebMercator.project(self, zoom, direction)
         return MapTile(zoom, direction, math.floor(x), math.floor(y))
 
-    def to_shapely_point(self): return shapely.geometry.Point(self.lon, self.lat)
-
     def compute_zoom_level(self, max_meters_per_pixel):
         meters_per_pixel_at_zoom_0 = ((EARTH_CIRCUMFERENCE / TILE_SIZE) * math.cos(math.radians(self.lat)))
         for zoom in reversed(range(0, 23+1)):
@@ -196,44 +183,6 @@ class GeoRect:
         area = spherical_cap_difference * (self.ne.lon - self.sw.lon) / 360
         assert area > 0 and area <= spherical_cap_difference and area <= earth_surface_area_in_km
         return area
-
-
-class GeoShape:
-    def __init__(self, shapefile_path):
-        sf = shapefile.Reader(shapefile_path)
-        self.shapes = sf.shapes()
-        assert len(self.shapes) > 0
-        assert all([shape.shapeTypeName == 'POLYGON' for shape in self.shapes])
-        self.shapes_data = None
-
-    def random_geopoint(self):
-        if self.shapes_data is None:
-            self.shapes_data = []
-            for shape in self.shapes:
-                bounds = GeoRect.from_shapefile_bbox(shape.bbox)
-                area = GeoRect.area(bounds)
-                self.shapes_data.append({"outline": shape, "bounds": bounds, "area": area, "area_relative_prefix_sum": 0})
-            total = sum([shape["area"] for shape in self.shapes_data])
-            area_prefix_sum = 0
-            for shape in self.shapes_data:
-                area_prefix_sum += shape["area"]
-                shape["area_relative_prefix_sum"] = area_prefix_sum / total
-
-        i = 0
-        while i < 250:
-            area_relative_prefix_sum = random.random()
-            shape = None
-            for shape_candidate in self.shapes_data:
-                if area_relative_prefix_sum < shape_candidate["area_relative_prefix_sum"]:
-                    shape = shape_candidate
-                    break
-
-            geopoint = GeoPoint.random(shape["bounds"])
-            point = geopoint.to_shapely_point()
-            polygon = shapely.geometry.shape(shape["outline"])
-            contains = polygon.contains(point)
-            if contains: return geopoint
-        raise ValueError("cannot seem to find a point in the shape's bounding box that's within the shape – is your data definitely okay (it may well be if it's a bunch of spread-out islands)? if you're sure, you'll need to raise the iteration limit in this function")
 
 
 class MapTileStatus:
@@ -418,8 +367,9 @@ class MapTileImage:
 ##### Graph Dataset Construction #####
 
 def crop_image_only_outside(img, tol=0):
-    # img is 2D image data
-    # tol  is tolerance
+    """
+    Removes black spaces in images
+    """
     img = np.array(img)
     mask = img>tol
     if img.ndim==3: mask = mask.all(2)
@@ -433,24 +383,20 @@ def crop_image_only_outside(img, tol=0):
     img = img.resize((n,m))
     return img
 
-def download_sat(   
-        tile_path_template: str = str(Path.cwd() / 'data/images'),# + '/aerialbot/aerialbot-tiles/{angle_if_oblique}z{zoom}x{x}y{y}-{hash}.png',
-        image_path_template: str = str(Path.cwd() / 'data/images'),# + '/{latitude},{longitude}-{width}x{height}m-z{zoom}-{image_height}x{image_width}.png',
+def download_sat(    
+        tile_path_template: str = str(Path.cwd() / 'src/data/spagbol/images') + '/aerialbot/aerialbot-tiles/{angle_if_oblique}z{zoom}x{x}y{y}-{hash}.jpg',
+        image_path_template: str = str(Path.cwd() / 'src/data/spagbol/images') + '/raw/{latitude},{longitude}-{width}x{height}m-z{zoom}.jpg',
         max_tries: int = 10,
         tile_url_template: str = "googlemaps",
-        shapefile: str = "aerialbot/shapefiles/usa/usa.shp",
         point: tuple = (51.243594, -0.576837),
-        width: int = 1000,
-        height: int = 1000,
-        image_width: int = 2048,
-        image_height: int = 2048,
-        max_meters_per_pixel: float = 0.4,
+        width: int = 2000,
+        height: int = 2000,
+        max_meters_per_pixel: float = 0.3,
         apply_adjustments: bool = True,
         image_quality: int = 100):
-
-    tile_path_template += '/aerialbot/aerialbot-tiles/{angle_if_oblique}z{zoom}x{x}y{y}-{hash}.jpg'
-    image_path_template += '/raw/{latitude},{longitude}-{width}x{height}m-z{zoom}-{image_height}x{image_width}.jpg'
-
+    """
+    Downloads satellite images from online services
+    """
     direction = ViewDirection("downward")
     if tile_url_template == "googlemaps": tile_url_template = "https://khms2.google.com/kh/v={google_maps_version}?x={x}&y={y}&z={zoom}"
     elif tile_url_template == "navermap": tile_url_template = "https://map.pstatic.net/nrb/styles/satellite/{naver_map_version}/{zoom}/{x}/{y}.jpg?mt=bg"
@@ -477,30 +423,10 @@ def download_sat(
 
     geowidth = width
     geoheight = height
-    foreshortening_factor = 1
-    if direction.is_oblique(): foreshortening_factor = math.sqrt(2)
-
-    # process max_meters_per_pixel setting
-    if image_width is None and image_height is None: assert max_meters_per_pixel is not None
-    elif image_height is None: max_meters_per_pixel = (max_meters_per_pixel or 1) * (width / image_width)
-    elif image_width is None: max_meters_per_pixel = (max_meters_per_pixel or 1) * (height / image_height) / foreshortening_factor
-    else:
-        if width / image_width <= (height / image_height) / foreshortening_factor: max_meters_per_pixel = (max_meters_per_pixel or 1) * (width / image_width)
-        else: max_meters_per_pixel = (max_meters_per_pixel or 1) * (height / image_height) / foreshortening_factor
-
-    # process image width and height for scaling
-    if image_width is not None or image_height is not None:
-        if image_height is None: image_height = height * (image_width / width) / foreshortening_factor
-        elif image_width is None: image_width = width * (image_height / height) * foreshortening_factor
-
-    ############################################################################
-    if shapefile is None and point is None: raise RuntimeError("neither shapefile path nor point configured")
-    elif point is None: shapes = GeoShape(shapefile)
 
     for tries in range(0, max_tries):
         if tries > max_tries: raise RuntimeError("too many retries – maybe there's no internet connection? either that, or your max_meters_per_pixel setting is too low")
-        if point is None: p = shapes.random_geopoint()
-        else: p = GeoPoint(point[0], point[1])
+        p = GeoPoint(point[0], point[1])
         zoom = p.compute_zoom_level(max_meters_per_pixel)
         rect = GeoRect.around_geopoint(p, geowidth, geoheight)
         grid = MapTileGrid.from_georect(rect, zoom, direction)
@@ -512,18 +438,13 @@ def download_sat(
     image = MapTileImage(grid.image)
     image.crop(zoom, direction, rect)
 
-    if image_width is not None or image_height is not None: image.scale(image_width, image_height)
+    image_width, image_height = 1000, 1000
+    image.scale(image_width, image_height)
 
-    ## Added
-    if image_width is None and image_height is None:
-        # Resize image to 1000x1000
-        image.scale(1000, 1000)
-        image_height = 1000
-        image_width = 1000
+    if apply_adjustments: 
+        image.enhance()
 
-    if apply_adjustments: image.enhance()
-
-    image_path = image_path_template.format(latitude=p.lat, longitude=p.lon, width=width, height=height, zoom=zoom, image_height=image_height, image_width=image_width)
+    image_path = image_path_template.format(latitude=p.lat, longitude=p.lon, width=width, height=height, zoom=zoom)
 
     d = os.path.dirname(image_path) 
     if not os.path.isdir(d): os.makedirs(d)
@@ -532,6 +453,9 @@ def download_sat(
     return image_path
 
 def generate_spiral_coordinates(num_points=10000, radius_increment=0.00001, theta_increment=0.1, origin=(0, 0)):
+    """
+    When an image isn't available at an exact coordinate, spiral outwards to find the closest image
+    """
     coordinates = []
     for i in range(num_points):
         radius_y = radius_increment * i
@@ -543,6 +467,9 @@ def generate_spiral_coordinates(num_points=10000, radius_increment=0.00001, thet
     return coordinates
 
 def streetview_image(pano, point, cwd):
+    """
+    Downloads streetview images for each node
+    """
     panos = []
     distances = []
     for pan in pano: 
@@ -550,14 +477,22 @@ def streetview_image(pano, point, cwd):
             distances.append(haversine((pan.lat, pan.lon), point, unit=Unit.METERS))
     distances = sorted(range(len(distances)), key=lambda k: distances[k])
 
-    if len(distances) > 5: 
-        distances = distances[:5] # Reduce distances to first 5 values at most
-
-    for idx, i in enumerate(distances):
+    counter = 0
+    while len(panos) < 5:
+        i = distances[counter]
         p = pano[i].pano_id
         date = pano[i].date
+        if date is not None: 
+            date = date.replace('-', '')
+            date = datetime.strptime(date, '%Y%m%d').strftime('%d-%m-%Y')
+            if date > '01-01-2024': # If data is newer, skip
+                i += 1
+                continue
+        else:
+            continue
+
         heading = round(pano[i].heading, 3)
-        image_name = f'{point}_{date}_{idx}.jpg'
+        image_name = f'{point}_{date}.jpg'
         try:
             if Path(f'{cwd}/data/images/raw/{image_name}').is_file(): 
                 panos.append([image_name, heading])
@@ -576,6 +511,7 @@ def streetview_image(pano, point, cwd):
                     panos.append([image_name, heading])
         except: 
             pass # if fails gets the next further away pano
+        i += 1
     return panos
 
 def get_streetview(point, cwd='/vol/research/deep_localisation/sat/', pano=False):
@@ -626,7 +562,6 @@ def download_junction_data(node_list, positions, cwd, bar=None, width=20):
         if bar is not None: bar.update.remote(1)
     return sub_dict, missing
 
-
 def warp_pano(input_image):
     top_input = input_image[input_image.shape[0]//2:, :]
     top_input = cv2.rotate(top_input, cv2.ROTATE_90_CLOCKWISE)
@@ -644,7 +579,6 @@ def warp_pano(input_image):
     return polared
 
 
-
 class GraphData():
     def __init__(self, args):
         self.args = args
@@ -654,12 +588,9 @@ class GraphData():
                         'new york': (40.7484, -73.9857), 'philly': (39.952364, -75.163616), 'singapore': (1.280999, 103.845047),
                         'seoul': (37.566989, 126.989192), 'hong kong': (22.280144, 114.158341), 'guildford': (51.246194, -0.57425)}
 
-        if self.args.dataset == 'spagbol':
-            self.train_coords = [self.coords[point] for point in self.args.train_localisations]
-            self.test_coords = [self.coords[point] for point in self.args.test_localisations]
-        else:
-            self.train_coords = self.args.train_localisation_vigor
-            self.test_coords = self.args.test_localisation_vigor
+        self.train_coords = [self.coords[point] for point in self.args.train_localisations]
+        self.test_coords = [self.coords[point] for point in self.args.test_localisations]
+
 
         self.graphs, self.test_graphs = {}, {}
         self.train_walks, self.val_walks, self.test_walks = {}, {}, {} # {point: walks}
@@ -845,9 +776,6 @@ class GraphData():
         node_walks = list(node_walks)
         return node_walks
         
-
-to_pil = T.ToPILImage()
-
 def remove_extension(path_string):
     if path_string[-4:] == '.png' or path_string[-4:] == '.jpg': return path_string[:-4]
     else: return path_string
@@ -969,7 +897,6 @@ class GraphDataset(Dataset):
             walk.nodes[node]['pos_image'] = poses[node]
             walk.nodes[node]['north_image'] = north
             
-
         for node in walk.nodes:
             del walk.nodes[node]['pov'] 
             del walk.nodes[node]['sat']
@@ -991,9 +918,41 @@ class GraphDataset(Dataset):
 
 if __name__ == '__main__':
     # If this file is run directly - download SpaGBOL data
-    from configs.config import return_defaults
+    # TEMPORARY IMPORT BODGE
+    from yacs.config import CfgNode as CN
 
-    args = return_defaults()
+    path = str(Path(__file__).parent.parent.absolute())
 
+    _C = CN()
+    """
+    SET PATH VARIABLES
+    """
+    _C.data = '/scratch/datasets/'
+    _C.dataset = 'spagbol'
+    _C.fov = 90
+
+    _C.train_localisations =  ['tokyo', 'london', 'philly', 'brussels', 'chicago', 'new york', 'singapore', 'hong kong', 'guildford']
+    _C.test_localisations =  ['boston']
+    _C.width = 2000   # Width of graph
+    _C.sat_width = 50 # Width of satellite image for each node 
+    _C.roll_direction = True
+    _C.yaw_threshold = 45 # 0-90
+    _C.num_yaws = 8
+
+    # I guess walk can't be more than k_hop - generally?
+    _C.walk = 4
+    _C.limit_povs = 0 # 0 doesn't limit, then [1, 2, 3, 4]
+    _C.exhaustive = False
+    _C.workers = 6
+
+    _C.path = path
+
+    _C.loss = 'triplet'
+    _C.encoder = 'sage'
+    _C.enc_layers = 2
+    _C.hidden_dim = 256
+    _C.out_dim = 64
+
+    args = _C.clone()
     graphs = GraphData(args)
     dataset = GraphDataset(args, graphs, stage='train')

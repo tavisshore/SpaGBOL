@@ -4,11 +4,12 @@ from pathlib import Path
 path = str(Path(__file__).parent.parent.absolute())
 
 _C = CN()
-# defaults 
+"""
+SET PATH VARIABLES
+"""
 _C.data = '/scratch/datasets/'
 _C.dataroot = 'data/images/'
 _C.savedir = 'data'
-
 
 _C.lr = 1e-4
 _C.dataset = 'spagbol'
