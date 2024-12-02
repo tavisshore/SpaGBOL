@@ -114,12 +114,6 @@ To complete training, simply execute run.py with desired arguments, for example:
 python run.py --data 'datapath' --fov 360 --walk 4 
 ```
 
-#### 🧐 SpaGBOL Evaluation
-```python 
-
-```
-
-
 
 ## 📊 SpaGBOL: Benchmark Results
 
