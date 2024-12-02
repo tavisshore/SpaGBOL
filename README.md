@@ -103,14 +103,15 @@ To download the **SpaGBOL** dataset, set the desired arguments at the bottom of 
 python src/utils/data.py
 ```
 
-#### ☕ Submodule Pretraining
+<!-- #### ☕ Submodule Pretraining
 ```python 
 
-```
+``` -->
 
 #### 👟 SpaGBOL Training
+To complete training, simply execute run.py with desired arguments, for example:
 ```python 
-
+python run.py --data 'datapath' --fov {90, 180, 360} --walk 4 
 ```
 
 #### 🧐 SpaGBOL Evaluation

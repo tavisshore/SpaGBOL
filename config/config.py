@@ -47,7 +47,7 @@ _C.yaw_oris = True # known ori, unknown bear
 # I guess walk can't be more than k_hop - generally?
 _C.walk = 4
 _C.limit_povs = 0 # 0 doesn't limit, then [1, 2, 3, 4]
-_C.exhaustive = False
+_C.exhaustive = True
 
 _C.layer_equal_walk = False
 _C.workers = 6
