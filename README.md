@@ -111,7 +111,7 @@ python src/utils/data.py
 #### 👟 SpaGBOL Training
 To complete training, simply execute run.py with desired arguments, for example:
 ```python 
-python run.py --data 'datapath' --fov {90, 180, 360} --walk 4 
+python run.py --data 'datapath' --fov 360 --walk 4 
 ```
 
 #### 🧐 SpaGBOL Evaluation
