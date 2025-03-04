@@ -5,7 +5,7 @@ import torch
 import lightning as pl
 from lightning.pytorch import loggers as plg
 from lightning.pytorch.callbacks import ModelCheckpoint
-from configs.config import return_defaults
+from config.config import return_defaults
 
 from src.models.model import FullModel
 

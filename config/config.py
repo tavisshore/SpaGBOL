@@ -37,9 +37,9 @@ _C.out_dim = 64
 # _C.dataroot = 'data/images/'
 # _C.savedir = 'data'
 
-# _C.lr = 1e-4
+_C.lr = 1e-4
 # _C.dataset = 'spagbol'
-# _C.batch_size = 16
+_C.batch_size = 16
 # _C.weight_decay = 1e-5
 # _C.epochs = 50
 # _C.checkpoint_dir = 'weights/checkpoints/'
@@ -79,7 +79,7 @@ _C.out_dim = 64
 # _C.workers = 6
 # _C.single_pov = False
 
-# _C.config = 'misc/standard'
+_C.config = 'standard'
 # _C.resume_training = False
 # _C.path = path
 # _C.fov = 90
@@ -91,7 +91,7 @@ _C.out_dim = 64
 # _C.out_dim = 64
 
 # _C.neg_distance = 10
-# _C.name = 'test'
+_C.name = 'eval'
 # _C.acc_interval = 1
 
 # # evaluation
@@ -103,12 +103,12 @@ _C.out_dim = 64
 # _C.gnn = True
 # _C.unfreeze_epoch = 0
 
-# _C.debug = False
+_C.debug = False
 # _C.tune = True
 
 # _C.triplet_mine = False
 # _C.double_negatives = False
-# _C.resume_training = False # CONDORHTC
+_C.resume_training = False # CONDORHTC
 
 def return_defaults():
     return _C.clone()

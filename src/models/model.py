@@ -13,8 +13,8 @@ from pytorch_metric_learning import losses
 from sklearn.metrics.pairwise import haversine_distances
 torchvision.disable_beta_transforms_warning()
 
-from utils.data import GraphData, GraphDataset
-from utils.metric import recall_accuracy
+from src.utils.data import GraphData, GraphDataset
+from src.utils.metric import recall_accuracy
 
 
 

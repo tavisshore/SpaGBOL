@@ -15,22 +15,13 @@ import torchvision.transforms.functional as F
 from geographiclib.geodesic import Geodesic
 import polarTransform
 import cv2
-from guillame import ImageDatabase
-from write_db import write_database
+from src.utils.guillame import ImageDatabase
+from src.utils.write_db import write_database
 
 import ray
 from ray.experimental import tqdm_ray
 
-from satellite import download_junction_data
-
-Image.MAX_IMAGE_PIXELS = None
-TILE_SIZE = 256 
-EARTH_CIRCUMFERENCE = 40075.016686 * 1000  
-GOOGLE_MAPS_VERSION_FALLBACK = '934'
-GOOGLE_MAPS_OBLIQUE_VERSION_FALLBACK = '148'
-USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15"
-LOGGER = None
-VERBOSITY = None
+from src.utils.satellite import download_junction_data
 
 to_ten = T.ToTensor()
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

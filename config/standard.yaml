@@ -23,3 +23,6 @@ encoder: 'sage'
 enc_layers: 2
 hidden_dim: 256
 out_dim: 64
+
+
+debug: No

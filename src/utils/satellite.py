@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 from pathlib import Path
-from torch_geometric.utils import from_networkx
 from tqdm import tqdm
 import numpy as np
-import torch
-from torch.utils.data import Dataset
 from pathlib import Path
 import os
 import re
@@ -16,21 +13,20 @@ import threading
 import hashlib
 import requests
 from PIL import Image, ImageEnhance, ImageOps
-import osmnx as ox
-import networkx as nx
-import torchvision.transforms as T
-import torchvision.transforms.functional as F
 from streetview import search_panoramas, get_panorama
 from haversine import haversine, Unit
-from geographiclib.geodesic import Geodesic
-import polarTransform
-import cv2
 from datetime import datetime
-from guillame import ImageDatabase
-from write_db import write_database
 
 import ray
-from ray.experimental import tqdm_ray
+
+Image.MAX_IMAGE_PIXELS = None
+TILE_SIZE = 256 
+EARTH_CIRCUMFERENCE = 40075.016686 * 1000  
+GOOGLE_MAPS_VERSION_FALLBACK = '934'
+GOOGLE_MAPS_OBLIQUE_VERSION_FALLBACK = '148'
+USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15"
+LOGGER = None
+VERBOSITY = None
 
 
 class ViewDirection:

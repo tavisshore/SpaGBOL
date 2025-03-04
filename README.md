@@ -95,15 +95,15 @@ DFS relates to a vehicle’s movement by mimicking how a vehicle explores routes
 conda env create -f requirements.yaml && conda activate spagbol
 ```
 
-#### 🏭 Data Download
-To download the **SpaGBOL** dataset, set the desired configuration in ```config/standard.yaml``` and run the following:
+#### 🏭 Only Data Download
+To download the **SpaGBOL v1** dataset, set the desired configuration in ```config/standard.yaml``` and run the following:
 ```python 
 python src/utils/data.py
 ```
 This is a very slow process so may take overnight.
 
 #### 👟 SpaGBOL Training
-To complete training, simply execute run.py with desired arguments, for example:
+To complete training, simply execute run.py - data will be downloaded if not present.
 ```python 
 python run.py --data 'datapath' --fov 360 --walk 4 
 ```
