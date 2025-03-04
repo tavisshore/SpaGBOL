@@ -18,7 +18,7 @@ def main():
     list_of_args = list(dict(cfg).keys())
     list_of_args.remove('debug')
 
-    for k in list_of_args: parser.add_argument('--config', default='misc/standard') if k == 'config' else parser.add_argument(f'--{k}')
+    for k in list_of_args: parser.add_argument(f'--{k}')
     
     parser.add_argument('--resume-training', action='store_true')
     parser.add_argument('--debug', action='store_true')
@@ -28,7 +28,6 @@ def main():
     for key, value in list(args.items()): 
         if value is not None: dictlist.append(key), dictlist.append(value) 
 
-    cfg.merge_from_file(f'{cfg.path}/configs/{args["config"]}.yaml')
     cfg.merge_from_list(dictlist)
     cfg.freeze()
     

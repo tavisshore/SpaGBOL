@@ -1,0 +1,25 @@
+data: '/scratch/datasets/'
+dataset: 'spagbol'
+fov: 90
+
+train_localisations:  ['tokyo', 'london', 'philly', 'brussels', 'chicago', 'new york', 'singapore', 'hong kong', 'guildford']
+test_localisations:  ['boston']
+width: 2000   # Width of graph
+sat_width: 50 # Width of satellite image for each node 
+roll_direction: True
+yaw_threshold: 45 # 0-90
+num_yaws: 8
+
+# I guess walk can't be more than k_hop - generally?
+walk: 3
+num_povs: 5 
+exhaustive: False
+workers: 1
+
+path: path
+
+loss: 'triplet'
+encoder: 'sage'
+enc_layers: 2
+hidden_dim: 256
+out_dim: 64
