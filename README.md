@@ -293,9 +293,10 @@ If you find SpaGBOL useful for your work please cite:
 @InProceedings{Shore_2025_WACV,
     author    = {Shore, Tavis and Mendez, Oscar and Hadfield, Simon},
     title     = {SpaGBOL: Spatial-Graph-Based Orientated Localisation},
-    booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+    booktitle = {Proceedings of the Winter Conference on Applications of Computer Vision (WACV)},
     month     = {February},
-    year      = {2025}
+    year      = {2025},
+    pages     = {6858-6867}
 }
 ```
 ## 📗 Related Works
