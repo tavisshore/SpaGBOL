@@ -17,7 +17,6 @@
 [![Conference](http://img.shields.io/badge/WACV-2025-4b44ce.svg)](https://wacv2025.thecvf.com/)
 [![Project Page](http://img.shields.io/badge/Project-Page-green)](https://tavisshore.co.uk/spagbol/)
 [![License](https://img.shields.io/badge/license-MIT-blue)]()
-[![Visits Badge](https://badges.pufler.dev/visits/tavisshore/SpaGBOL)](https://github.com/tavisshore/SpaGBOL)
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/spagbol-spatial-graph-based-orientated/cross-view-geo-localisation-on-spagbol)](https://paperswithcode.com/sota/cross-view-geo-localisation-on-spagbol?p=spagbol-spatial-graph-based-orientated)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/spagbol-spatial-graph-based-orientated/cross-view-geo-localisation-on-spagbol-180deg)](https://paperswithcode.com/sota/cross-view-geo-localisation-on-spagbol-180deg?p=spagbol-spatial-graph-based-orientated)
