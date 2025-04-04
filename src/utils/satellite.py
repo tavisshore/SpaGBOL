@@ -2,11 +2,9 @@
 from pathlib import Path
 from tqdm import tqdm
 import numpy as np
-import os
 import re
 import math
 import random
-import requests
 from PIL import Image
 from streetview import search_panoramas, get_panorama
 from haversine import haversine, Unit
@@ -37,7 +35,6 @@ def crop_image_only_outside(img, tol=0):
 
 
 def download_sat_point(point, cwd, zoom=20):
-
     image_name = f'{point[0]}_{point[1]}_{zoom}.jpg'
     image_path = f'{cwd}/raw/images/{image_name}'
     if not Path(image_path).is_file():

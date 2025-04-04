@@ -63,6 +63,8 @@ class GraphData():
         # Make sure subdirectories exist
         Path(f'{self.args.data}/raw/').mkdir(parents=True, exist_ok=True)
         Path(f'{self.args.data}/raw/images/').mkdir(parents=True, exist_ok=True)
+        Path(f'{self.args.data}/raw/graphs/').mkdir(parents=True, exist_ok=True)
+        Path(f'{self.args.data}/lmdb/').mkdir(parents=True, exist_ok=True)
 
         for coord in self.train_coords: 
             self.prepare_graph(coord)
@@ -70,15 +72,15 @@ class GraphData():
             self.prepare_graph(coord, stage='test')
 
     def prepare_graph(self, point=None, stage='train'):
-        if not Path(f'{self.args.data}/graphs/graph_{point}_{self.args.width}.pt').is_file():
+        if not Path(f'{self.args.data}/raw/graphs/graph_{point}_{self.args.width}.pt').is_file():
             corpus_graph = self.create_graph(centre=point, dist=self.args.width)
-            torch.save(corpus_graph, f'{self.args.path}/data/{self.args.dataset}/graphs/graph_{point}_{self.args.width}.pt')
-            src_images = Path(f'{self.args.path}/data/{self.args.dataset}/images/raw/')
-            dst_database = Path(f'{self.args.path}/data/{self.args.dataset}/images/lmdb/')
+            torch.save(corpus_graph, f'{self.args.path}/raw/graphs/graph_{point}_{self.args.width}.pt')
+            src_images = Path(f'{self.args.path}/raw/images/')
+            dst_database = Path(f'{self.args.path}/lmdb/')
             image_paths = {image_path.stem: image_path for image_path in sorted(src_images.rglob(f"*jpg"))}
-            write_database(image_paths, dst_database) # Write to LMDB
+            write_database(image_paths, dst_database) # Write to LMDB - memory intensive
         else: 
-            corpus_graph = torch.load(f'{self.args.data}/graphs/graph_{point}_{self.args.width}.pt')
+            corpus_graph = torch.load(f'{self.args.data}/raw/graphs/graph_{point}_{self.args.width}.pt')
             
         if stage == 'train': 
             self.graphs[point] = corpus_graph
@@ -137,7 +139,7 @@ class GraphData():
 
             sets = ['train', 'val']
             for s in sets:
-                walk_name = f'{self.args.path}/data/{self.args.dataset}/graphs/walks/{s}_walks_{point}_{self.args.width}_{self.args.walk}.npy'
+                walk_name = f'{self.args.path}/raw/graphs/walks/{s}_walks_{point}_{self.args.width}_{self.args.walk}.npy'
 
                 if Path(walk_name).is_file():
                     walks = np.load(walk_name, allow_pickle=True)
@@ -154,7 +156,7 @@ class GraphData():
                     self.val_walks[point] = walks
 
         else: # test - use whole corpus_graph
-            walk_name = f'{self.args.path}/data/{self.args.dataset}/graphs/walks/full_walks_{point}_{self.args.width}_{self.args.walk}.npy'
+            walk_name = f'{self.args.path}/raw/graphs/walks/full_walks_{point}_{self.args.width}_{self.args.walk}.npy'
 
             if Path(walk_name).is_file() and self.args.walk == self.args.walk:
                 walks = np.load(walk_name, allow_pickle=True)
@@ -192,7 +194,6 @@ class GraphData():
         graph_images = download_junction_data(node_list, positions, self.args.data)
         
         image_paths = dict((key, d[key]) for d, _ in graph_images for key in d)
-
 
         for node in image_paths.keys():
             graph.nodes[node]['pov'] = image_paths[node]['pov']
