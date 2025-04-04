@@ -7,7 +7,6 @@ import torch
 from torch.utils.data import Dataset
 from pathlib import Path
 import random
-from PIL import Image
 import osmnx as ox
 import networkx as nx
 import torchvision.transforms as T
@@ -15,13 +14,14 @@ import torchvision.transforms.functional as F
 from geographiclib.geodesic import Geodesic
 import polarTransform
 import cv2
-from src.utils.guillame import ImageDatabase
-from src.utils.write_db import write_database
-
-import ray
-from ray.experimental import tqdm_ray
-
-from src.utils.satellite import download_junction_data
+if __name__ == '__main__':
+    from guillame import ImageDatabase
+    from write_db import write_database
+    from satellite import download_junction_data
+else:
+    from src.utils.guillame import ImageDatabase
+    from src.utils.write_db import write_database
+    from src.utils.satellite import download_junction_data
 
 to_ten = T.ToTensor()
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -45,6 +45,7 @@ def warp_pano(input_image):
     return polared
 
 
+
 class GraphData():
     def __init__(self, args):
         self.args = args
@@ -53,13 +54,15 @@ class GraphData():
                         'boston': (42.358191, -71.060911), 'tokyo': (35.680886, 139.777483), 'chicago': (41.883181, -87.629645),
                         'new york': (40.7484, -73.9857), 'philly': (39.952364, -75.163616), 'singapore': (1.280999, 103.845047),
                         'seoul': (37.566989, 126.989192), 'hong kong': (22.280144, 114.158341), 'guildford': (51.246194, -0.57425)}
-
         self.train_coords = [self.coords[point] for point in self.args.train_localisations]
         self.test_coords = [self.coords[point] for point in self.args.test_localisations]
 
-
         self.graphs, self.test_graphs = {}, {}
         self.train_walks, self.val_walks, self.test_walks = {}, {}, {} # {point: walks}
+
+        # Make sure subdirectories exist
+        Path(f'{self.args.data}/raw/').mkdir(parents=True, exist_ok=True)
+        Path(f'{self.args.data}/raw/images/').mkdir(parents=True, exist_ok=True)
 
         for coord in self.train_coords: 
             self.prepare_graph(coord)
@@ -67,9 +70,8 @@ class GraphData():
             self.prepare_graph(coord, stage='test')
 
     def prepare_graph(self, point=None, stage='train'):
-        # Download graph or open if available
         if not Path(f'{self.args.data}/graphs/graph_{point}_{self.args.width}.pt').is_file():
-            corpus_graph = self.create_graph(centre=point, dist=self.args.width, cwd=self.args.path, workers=self.args.workers)
+            corpus_graph = self.create_graph(centre=point, dist=self.args.width)
             torch.save(corpus_graph, f'{self.args.path}/data/{self.args.dataset}/graphs/graph_{point}_{self.args.width}.pt')
             src_images = Path(f'{self.args.path}/data/{self.args.dataset}/images/raw/')
             dst_database = Path(f'{self.args.path}/data/{self.args.dataset}/images/lmdb/')
@@ -133,11 +135,6 @@ class GraphData():
                     if neighbour in val_nodes: 
                         val_graph.add_edge(node, neighbour)
 
-            # TEMPORARY
-            # walks = self.exhaustive_walks(corpus_graph, corpus_graph.nodes, 'full', self.args.walk)
-            # print(f'city: {point}, walks: {len(walks)}')
-            ############################# REMOVE
-
             sets = ['train', 'val']
             for s in sets:
                 walk_name = f'{self.args.path}/data/{self.args.dataset}/graphs/walks/{s}_walks_{point}_{self.args.width}_{self.args.walk}.npy'
@@ -166,9 +163,18 @@ class GraphData():
                 np.save(walk_name, walks)
             self.test_walks[point] = walks
 
-    def create_graph(self, centre=(51.509865, -0.118092), dist=1000, cwd='/home/ts00987/data', workers=4):
+    def create_graph(self, centre=(51.509865, -0.118092), dist=1000):
+        """
+        Create graph from centre point and width
+        Args:
+            centre (tuple): Latitude and Longitude of centre point
+            dist (int): Width of graph in meters
+            cwd (str): Current working directory
+        Returns:
+            g (networkx.Graph): Graph object
+        """
         g = ox.graph.graph_from_point(center_point=centre, dist=dist, dist_type='bbox', network_type='drive', simplify=True, retain_all=False, 
-                                    truncate_by_edge=False, clean_periphery=None, custom_filter=None)
+                                    truncate_by_edge=False, custom_filter=None)
         g = ox.projection.project_graph(g, to_latlong=True)
         graph = nx.Graph()
 
@@ -176,24 +182,17 @@ class GraphData():
             position = (n[1]['y'], n[1]['x'])
             graph.add_node(n[0], pos=position)
 
-        for start, end in g.edges(): graph.add_edge(start, end)
+        for start, end in g.edges(): 
+            graph.add_edge(start, end)
 
         positions = nx.get_node_attributes(graph, 'pos')
-
-        ray.init(include_dashboard=False, num_cpus=workers)
-        remote_tqdm = ray.remote(tqdm_ray.tqdm)
+        positions = dict((key, (float(positions[key][0]),float(positions[key][1]))) for key in positions)
         node_list = list(graph.nodes)
-        bar = remote_tqdm.remote(total=len(node_list))
-        node_lists = [node_list[i::workers] for i in range(workers)]
-        street_getters = [download_junction_data.remote(node_lists[i], positions, cwd, bar, width=self.args.sat_width) for i in range(workers)]
-        graph_images = ray.get(street_getters)
 
+        graph_images = download_junction_data(node_list, positions, self.args.data)
+        
         image_paths = dict((key, d[key]) for d, _ in graph_images for key in d)
-        missing = sum([m for _, m in graph_images])
-        print(f'Missing: {missing}, {round((missing / len(node_list))*100, 2)}%')
 
-        bar.close.remote()
-        ray.shutdown()
 
         for node in image_paths.keys():
             graph.nodes[node]['pov'] = image_paths[node]['pov']
@@ -381,21 +380,21 @@ if __name__ == '__main__':
 
     _C = CN()
 
-    _C.data = '/scratch/datasets/'
+    _C.data = '/media/tavis/scratch/datasets/temp/'
     _C.dataset = 'spagbol'
     _C.fov = 90
 
     _C.train_localisations =  ['tokyo', 'london', 'philly', 'brussels', 'chicago', 'new york', 'singapore', 'hong kong', 'guildford']
     _C.test_localisations =  ['boston']
     _C.width = 2000   # Width of graph
-    _C.sat_width = 50 # Width of satellite image for each node 
+    _C.sat_width = 100 # Width of satellite image for each node 
     _C.roll_direction = True
     _C.yaw_threshold = 45 # 0-90
     _C.num_yaws = 8
 
     # I guess walk can't be more than k_hop - generally?
-    _C.walk = 4
-    _C.num_povs = 0 # 0 doesn't limit, then [1, 2, 3, 4]
+    _C.walk = 3
+    _C.num_povs = 1 # 0 doesn't limit, then [1, 2, 3, 4]
     _C.exhaustive = False
     _C.workers = 1
 
@@ -408,7 +407,6 @@ if __name__ == '__main__':
     _C.out_dim = 64
 
     cfg = _C.clone()
-    cfg.merge_from_file('config/standard.yaml')
     cfg.freeze()
 
     # parser = args.to_parser()
