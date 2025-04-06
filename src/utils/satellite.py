@@ -182,32 +182,10 @@ def get_streetview(point, cwd='/vol/research/deep_localisation/sat/', pano=False
     return panos
 
 def download_junction_data(node_list, positions, cwd):
-    missing = 0
     sub_dict = {}
     for node in tqdm(node_list, 'Downloading Junction Data', position=0):
         pos = positions[node]
-
-    # try:
         panos = get_streetview(pos, cwd=cwd)
-
-        # I think satellite is basically always fine unless over querying
         sat_path = download_sat_point(point=pos, cwd=cwd)
-    
-        # if len(panos) == 0:
-        #     missing += 1
-        #     # Make nicer fix here if non-zero
-        #     # selects random pov from other nodes - CHANGE to selecting closest node's pov
-        #     pano_paths = sub_dict[list(sub_dict.keys())[random.randint(0, len(sub_dict) - 1)]]['pov']
-        #     headings = [0 for _ in range(len(pano_paths))]
-        # else:
-        pano_paths = [pair[0] for pair in panos]
-        headings = [pair[1] for pair in panos]
-
-        sub_dict[node] = {'sat': sat_path, 'pov': pano_paths, 'heading': headings}
-
-        # except:
-            # missing += 1
-            # sub_dict[node] = {'sat': None, 'pov': None, 'heading': None}
-            #  TEMPORARY FIX TO DOWNLOAD MOST OF THE IMAGES
-
-    return sub_dict, missing
+        sub_dict[node] = {'sat': sat_path, 'street': [pair[0] for pair in panos], 'heading': [pair[1] for pair in panos]}
+    return sub_dict

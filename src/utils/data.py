@@ -191,17 +191,12 @@ class GraphData():
         positions = dict((key, (float(positions[key][0]),float(positions[key][1]))) for key in positions)
         node_list = list(graph.nodes)
 
-        graph_images = download_junction_data(node_list, positions, self.args.data)
+        image_sub_dict = download_junction_data(node_list, positions, self.args.data)
         
-        print(type(graph_images))
-        breakpoint()
-
-        image_paths = dict((key, d[key]) for d, _ in graph_images for key in d)
-
-        for node in image_paths.keys():
-            graph.nodes[node]['pov'] = image_paths[node]['pov']
-            graph.nodes[node]['sat'] = image_paths[node]['sat']
-            graph.nodes[node]['north'] = [round(i, 3) for i in image_paths[node]['heading']]
+        for node in image_sub_dict.keys():
+            graph.nodes[node]['pov'] = image_sub_dict[node]['pov']
+            graph.nodes[node]['street'] = image_sub_dict[node]['street']
+            graph.nodes[node]['north'] = [round(i, 3) for i in image_sub_dict[node]['heading']]
 
         # Add potential yaw for each node, list of north-aligned angles between neighbours
         for node in graph.nodes:
