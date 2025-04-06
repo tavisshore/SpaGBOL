@@ -193,6 +193,9 @@ class GraphData():
 
         graph_images = download_junction_data(node_list, positions, self.args.data)
         
+        print(type(graph_images))
+        breakpoint()
+
         image_paths = dict((key, d[key]) for d, _ in graph_images for key in d)
 
         for node in image_paths.keys():
@@ -381,11 +384,11 @@ if __name__ == '__main__':
 
     _C = CN()
 
-    _C.data = '/media/tavis/scratch/datasets/temp/'
+    _C.data = '/scratch/datasets/temp/'
     _C.dataset = 'spagbol'
     _C.fov = 90
 
-    _C.train_localisations =  ['tokyo', 'london', 'philly', 'brussels', 'chicago', 'new york', 'singapore', 'hong kong', 'guildford']
+    _C.train_localisations =  ['singapore', 'tokyo', 'london', 'philly', 'brussels', 'chicago', 'new york', 'hong kong', 'guildford']
     _C.test_localisations =  ['boston']
     _C.width = 2000   # Width of graph
     _C.sat_width = 100 # Width of satellite image for each node 
@@ -395,7 +398,7 @@ if __name__ == '__main__':
 
     # I guess walk can't be more than k_hop - generally?
     _C.walk = 3
-    _C.num_povs = 1 # 0 doesn't limit, then [1, 2, 3, 4]
+    _C.num_povs = 5 # 0 doesn't limit, then [1, 2, 3, 4]
     _C.exhaustive = False
     _C.workers = 1
 
