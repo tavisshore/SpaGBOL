@@ -94,7 +94,7 @@ conda env create -f requirements.yaml && conda activate spagbol
 ```
 
 #### 🏭 Only Data Download
-To download the **SpaGBOL v1** dataset, set the desired configuration in ```config/standard.yaml``` and run the following:
+To download the **SpaGBOL v1** dataset, set the desired configuration in ```src/utils/data.py``` and run the following:
 ```python 
 python src/utils/data.py
 ```
