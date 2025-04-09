@@ -273,7 +273,7 @@ class GraphDataset(Dataset):
                     self.stage_walks[key].append(walk)
         self.stage_keys = list(self.stage_walks.keys())
 
-        self.lmdb = ImageDatabase(f'{self.args.path}/data/{self.args.dataset}/lmdb/', readahead=True)
+        self.lmdb = ImageDatabase(f'{self.args.data}/lmdb/', readahead=True)
         self.lmdb_keys = list(self.lmdb.keys)
         self.stage = stage
 
@@ -295,7 +295,7 @@ class GraphDataset(Dataset):
 
         for idx, node in enumerate(walk_nodes):
             yaws = np.array([y for y in walk.nodes[node]['yaws']]) # precalculated at graph construction time
-            pano_keys = walk.nodes[node]['pov']
+            pano_keys = walk.nodes[node]['street']
 
             if self.args.num_povs: 
                 pano_keys = pano_keys[:self.args.num_povs]
@@ -352,7 +352,7 @@ class GraphDataset(Dataset):
             walk.nodes[node]['north_image'] = north
             
         for node in walk.nodes:
-            del walk.nodes[node]['pov'] 
+            del walk.nodes[node]['street'] 
             del walk.nodes[node]['sat']
             del walk.nodes[node]['yaws']
             del walk.nodes[node]['north']
@@ -387,7 +387,7 @@ if __name__ == '__main__':
     _C.multi_thread = True
     _C.fov = 90
 
-    _C.train_localisations =  ['singapore'] #, 'tokyo', 'london', 'philly', 'brussels', 'chicago', 'new york', 'hong kong', 'guildford']
+    _C.train_localisations =  ['singapore', 'tokyo', 'london', 'philly', 'brussels', 'chicago', 'new york', 'hong kong', 'guildford']
     _C.test_localisations =  ['boston']
     _C.width = 2000   # Width of graph
     _C.sat_width = 100 # Width of satellite image for each node 
@@ -417,3 +417,5 @@ if __name__ == '__main__':
 
     graphs = GraphData(cfg)
     dataset = GraphDataset(cfg, graphs, stage='train')
+    walk = dataset.__getitem__(0)   
+    print(walk)
