@@ -64,6 +64,8 @@ class GraphData():
         Path(f'{self.args.data}/raw/').mkdir(parents=True, exist_ok=True)
         Path(f'{self.args.data}/raw/images/').mkdir(parents=True, exist_ok=True)
         Path(f'{self.args.data}/raw/graphs/').mkdir(parents=True, exist_ok=True)
+        Path(f'{self.args.data}/raw/graphs/walks/').mkdir(parents=True, exist_ok=True)
+        
         Path(f'{self.args.data}/lmdb/').mkdir(parents=True, exist_ok=True)
 
         for coord in self.train_coords: 
@@ -72,15 +74,16 @@ class GraphData():
             self.prepare_graph(coord, stage='test')
 
     def prepare_graph(self, point=None, stage='train'):
-        if not Path(f'{self.args.data}/raw/graphs/graph_{point}_{self.args.width}.pt').is_file():
+        graph_name = f'graph_{point[0]}_{point[1]}_{self.args.width}.pt'
+        if not Path(f'{self.args.data}/raw/graphs/{graph_name}').is_file():
             corpus_graph = self.create_graph(centre=point, dist=self.args.width)
-            torch.save(corpus_graph, f'{self.args.path}/raw/graphs/graph_{point}_{self.args.width}.pt')
-            src_images = Path(f'{self.args.path}/raw/images/')
-            dst_database = Path(f'{self.args.path}/lmdb/')
+            torch.save(corpus_graph, f'{self.args.data}/raw/graphs/{graph_name}')
+            src_images = Path(f'{self.args.data}/raw/images/')
+            dst_database = Path(f'{self.args.data}/lmdb/')
             image_paths = {image_path.stem: image_path for image_path in sorted(src_images.rglob(f"*jpg"))}
             write_database(image_paths, dst_database) # Write to LMDB - memory intensive
         else: 
-            corpus_graph = torch.load(f'{self.args.data}/raw/graphs/graph_{point}_{self.args.width}.pt')
+            corpus_graph = torch.load(f'{self.args.data}/raw/graphs/{graph_name}', weights_only=False)
             
         if stage == 'train': 
             self.graphs[point] = corpus_graph
@@ -139,7 +142,7 @@ class GraphData():
 
             sets = ['train', 'val']
             for s in sets:
-                walk_name = f'{self.args.path}/raw/graphs/walks/{s}_walks_{point}_{self.args.width}_{self.args.walk}.npy'
+                walk_name = f'{self.args.data}/raw/graphs/walks/{s}_walks_{point}_{self.args.width}_{self.args.walk}.npy'
 
                 if Path(walk_name).is_file():
                     walks = np.load(walk_name, allow_pickle=True)
@@ -156,7 +159,7 @@ class GraphData():
                     self.val_walks[point] = walks
 
         else: # test - use whole corpus_graph
-            walk_name = f'{self.args.path}/raw/graphs/walks/full_walks_{point}_{self.args.width}_{self.args.walk}.npy'
+            walk_name = f'{self.args.data}/raw/graphs/walks/full_walks_{point}_{self.args.width}_{self.args.walk}.npy'
 
             if Path(walk_name).is_file() and self.args.walk == self.args.walk:
                 walks = np.load(walk_name, allow_pickle=True)
@@ -191,10 +194,10 @@ class GraphData():
         positions = dict((key, (float(positions[key][0]),float(positions[key][1]))) for key in positions)
         node_list = list(graph.nodes)
 
-        image_sub_dict = download_junction_data(node_list, positions, self.args.data)
+        image_sub_dict = download_junction_data(node_list, positions, self.args.data, multi_thread=self.args.multi_thread)
         
         for node in image_sub_dict.keys():
-            graph.nodes[node]['pov'] = image_sub_dict[node]['pov']
+            graph.nodes[node]['sat'] = image_sub_dict[node]['sat']
             graph.nodes[node]['street'] = image_sub_dict[node]['street']
             graph.nodes[node]['north'] = [round(i, 3) for i in image_sub_dict[node]['heading']]
 
@@ -381,9 +384,10 @@ if __name__ == '__main__':
 
     _C.data = '/scratch/datasets/temp/'
     _C.dataset = 'spagbol'
+    _C.multi_thread = False
     _C.fov = 90
 
-    _C.train_localisations =  ['singapore', 'tokyo', 'london', 'philly', 'brussels', 'chicago', 'new york', 'hong kong', 'guildford']
+    _C.train_localisations =  ['singapore'] #, 'tokyo', 'london', 'philly', 'brussels', 'chicago', 'new york', 'hong kong', 'guildford']
     _C.test_localisations =  ['boston']
     _C.width = 2000   # Width of graph
     _C.sat_width = 100 # Width of satellite image for each node 

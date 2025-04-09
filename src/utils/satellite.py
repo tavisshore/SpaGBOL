@@ -12,9 +12,23 @@ from datetime import datetime
 import utm
 from image_downloading import download_image
 Image.MAX_IMAGE_PIXELS = None
+from torch_geometric.utils import erdos_renyi_graph, to_networkx, from_networkx
 
 ##### Graph Dataset Construction #####
 DATE_LIMIT = datetime.strptime('2025-01', '%Y-%m')
+
+HEADERS = {
+            'cache-control': 'max-age=0',
+            'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="99", "Google Chrome";v="99"',
+            'sec-ch-ua-mobile': '?0',
+            'sec-ch-ua-platform': '"Windows"',
+            'sec-fetch-dest': 'document',
+            'sec-fetch-mode': 'navigate',
+            'sec-fetch-site': 'none',
+            'sec-fetch-user': '?1',
+            'upgrade-insecure-requests': '1',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.82 Safari/537.36'
+        }
 
 def crop_image_only_outside(img, tol=0):
     """
@@ -38,18 +52,7 @@ def download_sat_point(point, cwd, zoom=20):
     image_name = f'{point[0]}_{point[1]}_{zoom}.jpg'
     image_path = f'{cwd}/raw/images/{image_name}'
     if not Path(image_path).is_file():
-        headers = {
-                    'cache-control': 'max-age=0',
-                    'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="99", "Google Chrome";v="99"',
-                    'sec-ch-ua-mobile': '?0',
-                    'sec-ch-ua-platform': '"Windows"',
-                    'sec-fetch-dest': 'document',
-                    'sec-fetch-mode': 'navigate',
-                    'sec-fetch-site': 'none',
-                    'sec-fetch-user': '?1',
-                    'upgrade-insecure-requests': '1',
-                    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.82 Safari/537.36'
-                }
+
 
         lat, lon, zn, zl = utm.from_latlon(point[0], point[1])
 
@@ -72,7 +75,7 @@ def download_sat_point(point, cwd, zoom=20):
         lat2 = float(lat2)
         lon2 = float(lon2)
 
-        img = download_image(lat1, lon1, lat2, lon2, zoom, 'https://mt.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', headers, 256, 3)
+        img = download_image(lat1, lon1, lat2, lon2, zoom, 'https://mt.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', HEADERS, 256, 3)
         img = img[:, :, ::-1]
         img = Image.fromarray(img)
         img = img.resize((512, 512))
@@ -102,7 +105,7 @@ def generate_spiral_coordinates(num_points=1000, radius_increment=0.00001, theta
         coordinates.append((round(x, 7), round(y, 7)))
     return coordinates
 
-def streetview_image(pano, point, cwd):
+def streetview_image(pano, point, cwd, multi_thread=False):
     """
     Downloads streetview images for each node
     - sort this code out - added function that adds random noise to lat and lon if no images found
@@ -142,7 +145,7 @@ def streetview_image(pano, point, cwd):
             panos.append([image_name, heading])
         else:
             try:
-                panorama = get_panorama(pano_id=p, multi_threaded=True) # True is faster but may fail
+                panorama = get_panorama(pano_id=p, multi_threaded=multi_thread) # True is faster but may fail
 
                 if isinstance(panorama, Image.Image):
                     panorama = crop_image_only_outside(panorama)
@@ -166,26 +169,41 @@ def retry_pano(point):
     # search for panoramas again
     return point
 
-def get_streetview(point, cwd='/vol/research/deep_localisation/sat/', pano=False):
+def get_streetview(point, cwd='/vol/research/deep_localisation/sat/', multi_thread=False):
+    # Check if there are already streetview images for this point
+    # {point[0]}_{point[1]}_{date}_street.jpg'
+        # image_path = f'{cwd}/raw/images/
+    # existing_imgs = list(Path(f'{cwd}/raw/images/').glob(f'{point[0]}_{point[1]}_*'))
+
+    # if len(existing_imgs) < 5:
     panos = []
     pano = []
-
     pano = search_panoramas(lat=point[0], lon=point[1])
 
     while len(pano) == 0:
         point = retry_pano(point)
         pano = search_panoramas(lat=point[0], lon=point[1])
 
-    p = streetview_image(pano, point, cwd) # List of [[image_name, heading], ...]
-
+    p = streetview_image(pano, point, cwd, multi_thread=multi_thread) # List of [[image_name, heading], ...]
     panos.extend(p)
+    # else:
+    #     panos = []
+    #     # get all images in directory
+    #     for file in existing_imgs:
+    #         image_name = file.name
+    #         heading = re.findall(r'_(\d+_\d+)_street', image_name)[0]
+    #         panos.append([image_name, heading])
     return panos
 
-def download_junction_data(node_list, positions, cwd):
+def download_junction_data(node_list, positions, cwd, multi_thread):
     sub_dict = {}
     for node in tqdm(node_list, 'Downloading Junction Data', position=0):
         pos = positions[node]
-        panos = get_streetview(pos, cwd=cwd)
+
+        # check if images exist already
+
+        panos = get_streetview(pos, cwd=cwd, multi_thread=multi_thread)
         sat_path = download_sat_point(point=pos, cwd=cwd)
+
         sub_dict[node] = {'sat': sat_path, 'street': [pair[0] for pair in panos], 'heading': [pair[1] for pair in panos]}
     return sub_dict

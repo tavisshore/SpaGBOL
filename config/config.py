@@ -7,6 +7,7 @@ _C = CN()
 
 _C.data = '/scratch/datasets/'
 _C.dataset = 'spagbol'
+_C.multi_thread = True
 _C.fov = 90
 
 _C.train_localisations =  ['tokyo', 'london', 'philly', 'brussels', 'chicago', 'new york', 'singapore', 'hong kong', 'guildford']
