@@ -27,7 +27,9 @@
 
 
 </div>
- 
+
+## 📣 [Download Dataset Now!](#only-data-download) 
+
 ## 📓 Description 
 Cross-View Geo-Localisation within urban regions is challenging in part due to the lack of geo-spatial structuring within current datasets and techniques. We propose utilising graph representations to model sequences of local observations and the connectivity of the target location. Modelling as a graph enables generating previously unseen sequences by sampling with new parameter configurations. To leverage this newly available information, we propose a GNN-based architecture, producing spatially strong embeddings and improving discriminability over isolated image embeddings.
 
@@ -86,9 +88,6 @@ DFS relates to a vehicle’s movement by mimicking how a vehicle explores routes
 
 ---
 ## 🧰 SpaGBOL: Benchmarking
-
-🚧 Code still being polished...
-
 #### 🐍 Environment Setup
 ```bash
 conda env create -f requirements.yaml && conda activate spagbol
@@ -99,7 +98,7 @@ To download the **SpaGBOL v1** dataset, set the desired configuration in ```conf
 ```python 
 python src/utils/data.py
 ```
-This is a very slow process so may take overnight.
+This is a very slow process so may take multiple days. Multi-threaded downloading greatly increases the speed, however if you encounter connection errors - set ```multi_threaded``` to False for a while.
 
 #### 👟 SpaGBOL Training
 To complete training, simply execute run.py - data will be downloaded if not present.
