@@ -384,7 +384,7 @@ if __name__ == '__main__':
 
     _C.data = '/scratch/datasets/temp/'
     _C.dataset = 'spagbol'
-    _C.multi_thread = False
+    _C.multi_thread = True
     _C.fov = 90
 
     _C.train_localisations =  ['singapore'] #, 'tokyo', 'london', 'philly', 'brussels', 'chicago', 'new york', 'hong kong', 'guildford']
